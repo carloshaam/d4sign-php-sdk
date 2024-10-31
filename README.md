@@ -6,7 +6,7 @@ Uma biblioteca para interagir com a API D4Sign.
 
 ## Instalação
 
-Use o Composer para instalar a biblioteca: (Ainda não foi lançada)
+Use o Composer para instalar a biblioteca: (Ainda não foi lançada no packagist)
 
 ```bash
 composer require carloshaam/d4sign-api
