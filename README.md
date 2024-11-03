@@ -1,43 +1,133 @@
-# Biblioteca D4Sign (Em desenvolvimento)
+# D4Sign SDK PHP (Em desenvolvimento)
 
-Uma biblioteca para interagir com a API D4Sign.
+[![Latest Stable Version](https://poser.pugx.org/vendor/d4sign-sdk/version)](https://packagist.org/packages/vendor/d4sign-sdk)
+[![License](https://poser.pugx.org/vendor/d4sign-sdk/license)](https://packagist.org/packages/vendor/d4sign-sdk)
 
-**Documentação Completa:** Consulte a [documentação oficial](https://docapi.d4sign.com.br/docs) para exemplos detalhados, funções avançadas e casos de uso.
+## Visão Geral
+Este SDK fornece uma integração completa com a API da D4Sign, facilitando o uso das funcionalidades da plataforma em aplicações PHP. Com este pacote, você pode gerenciar Cofres, Documentos, Signatários, Usuários, Tags, Certificados e Observadores de maneira intuitiva e eficiente.
+
+## Índice
+- [Instalação](#instalação)
+- [Configuração](#configuração)
+- [Uso](#uso)
+    - [Cofres](#cofres) - (Em desenvolvimento)
+    - [Documentos](#documentos)
+    - [Signatários](#signatários) - (Em desenvolvimento)
+    - [Usuários](#usuários) - (Em desenvolvimento)
+    - [Tags](#tags) - (Em desenvolvimento)
+    - [Certificado](#certificado) - (Em desenvolvimento)
+    - [Observadores](#observadores) - (Em desenvolvimento)
+    - [Webhook](#webhook) - (Em desenvolvimento)
+- [Contribuição](#contribuição)
+- [Licença](#licença)
 
 ## Instalação
 
-Use o Composer para instalar a biblioteca: (Ainda não foi lançada no packagist)
+Este SDK está disponível no [Packagist](https://packagist.org/packages/vendor/d4sign-sdk) e pode ser instalado via Composer:
 
 ```bash
-composer require carloshaam/d4sign-api
+composer require carloshaam/d4sign-sdk
 ```
 
-#### Requisitos
+## Configuração
+
+Para utilizar o SDK, você precisa configurar suas credenciais da API D4Sign. Defina as variáveis de ambiente abaixo ou configure diretamente no código:
+
+```dotenv
+D4SIGN_API_URL=your_api_url
+D4SIGN_API_KEY=your_api_key
+D4SIGN_SECRET_KEY=your_secret_key
+```
+
+Ou, ao inicializar o SDK:
+
+```php
+use D4signSdk\D4Sign;
+
+$d4sign = new D4Sign('your_api_key', 'your_secret_key', 'your_api_url');
+```
+
+## Cofres
+
+Gerencie cofres, incluindo criação e visualização de cofres.
+
+```php
+$safes = $d4sign->safes->findAll();
+```
+
+## Documentos
+
+Faça o upload de documentos, adicione arquivos e gerencie o status de documentos.
+
+```php
+$documents = $d4sign->documents->uploadDocumentByIdSafe();
+````
+
+## Signatários
+
+Adicione, remova e gerencie signatários de documentos.
+
+```php
+$signatories = $d4sign->signatories->findByDocumentId();
+````
+
+## Usuários
+
+Gerencie usuários na sua conta D4Sign.
+
+```php
+$users = $d4sign->users->findAll();
+````
+
+## Tags
+
+Utilize e gerencie tags para personalizar seus documentos.
+
+```php
+$tags = $d4sign->tags->findByDocumentId();
+````
+
+## Certificado
+
+Acesse e gerencie certificados de assinatura.
+
+```php
+$certificates = $d4sign->certificates->addByDocumentId();
+````
+
+## Observadores
+
+Adicione observadores para acompanhar a assinatura de documentos.
+
+```php
+$watchers = $d4sign->watchers->removeByDocumentId();
+````
+
+## Webhook
+
+Cadastre webhook para acompanhar seus documentos.
+
+```php
+$webhooks = $d4sign->webhooks->create();
+````
+
+Para uma visão completa de todas as funções e parâmetros, consulte a [documentação oficial](https://docapi.d4sign.com.br/docs) para exemplos detalhados, funções avançadas e casos de uso.
+
+## Requisitos
 
 - **PHP 7.4 ou superior:** Garantimos compatibilidade com as versões mais recentes do PHP para aproveitar os recursos modernos da linguagem.
 - **Extensões PHP:** Dependências comuns como `curl` para realizar requisições HTTP.
 
-## Uso
+## Contribuição
 
-```php
-<?php
+Contribuições são bem-vindas! Siga estas etapas para contribuir:
 
-require 'vendor/autoload.php';
+1. Fork o repositório.
+2. Crie um branch para sua feature (`git checkout -b feature/nova-feature`).
+3. Faça um commit das suas alterações (`git commit -am 'Adiciona nova feature'`).
+4. Envie o push do branch (`git push origin feature/nova-feature`).
+5. Abra um Pull Request.
 
-use Carloshaam\D4signApi\Config;
-use Carloshaam\D4signApi\D4SignApiClient;
+## Licença
 
-$config = new Config('https://sandbox.d4sign.com.br/api', 'YOUR_TOKEN_API', 'YOUR_CRYPT_KEY');
-$client = new D4SignApiClient($config);
-
-$documents = $client->documents()->getByUuid('uuid');
-print_r($documents);
-```
-
-## Testes
-
-Execute os testes com o PHPUnit:
-
-```bash
-composer test
-```
+Este projeto está licenciado sob a [MIT License](#).

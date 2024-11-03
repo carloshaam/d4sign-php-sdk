@@ -6,12 +6,13 @@
     "require": {
         "php": ">=7.4",
         "ext-json": "*",
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "guzzlehttp/guzzle": "^7.0"
     },
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Carloshaam\\D4signApi\\": "src/"
+            "D4Sign\\": "src/"
         }
     },
     "require-dev": {
