@@ -10,7 +10,7 @@ Este SDK fornece uma integração completa com a API da D4Sign, facilitando o us
 - [Instalação](#instalação)
 - [Configuração](#configuração)
 - [Uso](#uso)
-    - [Cofres](#cofres) - (Em desenvolvimento)
+    - [Cofres](#cofres)
     - [Documentos](#documentos)
     - [Signatários](#signatários) - (Em desenvolvimento)
     - [Usuários](#usuários) - (Em desenvolvimento)
