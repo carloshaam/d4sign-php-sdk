@@ -6,20 +6,25 @@
 ## Visão Geral
 Este SDK fornece uma integração completa com a API da D4Sign, facilitando o uso das funcionalidades da plataforma em aplicações PHP. Com este pacote, você pode gerenciar Cofres, Documentos, Signatários, Usuários, Tags, Certificados e Observadores de maneira intuitiva e eficiente.
 
+> [!WARNING]
+> Projeto em desenvolvimento, alterações estão sendo feitas e mudanças rigorosas podem acontecer a qualquer momento.
+
 ## Índice
 - [Instalação](#instalação)
 - [Configuração](#configuração)
 - [Uso](#uso)
     - [Cofres](#cofres)
     - [Documentos](#documentos)
-    - [Signatários](#signatários) - (Em desenvolvimento)
-    - [Usuários](#usuários) - (Em desenvolvimento)
-    - [Tags](#tags) - (Em desenvolvimento)
-    - [Certificado](#certificado) - (Em desenvolvimento)
-    - [Observadores](#observadores) - (Em desenvolvimento)
-    - [Webhook](#webhook) - (Em desenvolvimento)
+    - [Signatários](#signatários)
+    - [Usuários](#usuários)
+    - [Tags](#tags)
+    - [Certificado](#certificado)
+    - [Observadores](#observadores)
+    - [Webhook](#webhook)
+- [Requisitos](#requisitos)
 - [Contribuição](#contribuição)
 - [Licença](#licença)
+- [Links](#links)
 
 ## Instalação
 
@@ -117,6 +122,10 @@ Para uma visão completa de todas as funções e parâmetros, consulte a [docume
 
 - **PHP 7.4 ou superior:** Garantimos compatibilidade com as versões mais recentes do PHP para aproveitar os recursos modernos da linguagem.
 - **Extensões PHP:** Dependências comuns como `curl` para realizar requisições HTTP.
+
+## Links
+
+- [Documentação Oficial](https://docapi.d4sign.com.br)
 
 ## Contribuição
 

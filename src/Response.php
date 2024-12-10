@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace D4Sign;
 
-class Response
+use D4Sign\Contracts\ResponseInterface;
+
+class Response implements ResponseInterface
 {
     protected int $statusCode;
     protected $content;

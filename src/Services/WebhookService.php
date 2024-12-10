@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace D4Sign\Services;
 
-class WebhookService extends BaseService
+use D4Sign\Contracts\WebhookServiceInterface;
+
+class WebhookService extends BaseService implements WebhookServiceInterface
 {
     //
 }
