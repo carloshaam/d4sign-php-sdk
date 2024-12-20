@@ -6,7 +6,7 @@ namespace D4Sign\Tests;
 
 use PHPUnit\Framework\TestCase;
 
-class DocumentServiceTest extends TestCase
+class TagServiceTest extends TestCase
 {
     //
 }

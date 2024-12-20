@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace D4Sign\Tests;
+
 use D4Sign\D4Sign;
 use D4Sign\Document\Contracts\DocumentServiceInterface;
 use D4Sign\Safe\Contracts\SafeServiceInterface;
