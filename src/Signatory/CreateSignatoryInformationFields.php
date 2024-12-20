@@ -71,7 +71,7 @@ class CreateSignatoryInformationFields implements CreateSignatoryInformationFiel
     public function toArray(): array
     {
         return [
-            'key-signer' => $this->keySigner,
+            'key_signer' => $this->keySigner,
             'email' => $this->email,
             'display_name' => $this->displayName,
             'documentation' => $this->documentation,

@@ -9,24 +9,24 @@ use D4Sign\Exceptions\D4SignInvalidArgumentException;
 
 class SendToSignersFields implements SendToSignersFieldsInterface
 {
-    private string $skipEmail;
-    private string $workflow;
+    private int $skipEmail;
+    private int $workflow;
     private ?string $message = null;
     private ?string $tokenAPI = null;
 
     /**
-     * @param string $skipEmail Se o envio do e-mail deve ser pulado ("0" ou "1").
-     * @param string $workflow Define se o workflow está ativado ou não ("0" ou "1").
+     * @param int $skipEmail Se o envio do e-mail deve ser pulado ("0" ou "1").
+     * @param int $workflow Define se o workflow está ativado ou não ("0" ou "1").
      */
-    public function __construct(string $skipEmail, string $workflow)
+    public function __construct(int $skipEmail, int $workflow)
     {
-        if (! in_array($skipEmail, ['0', '1'], true)) {
+        if (! in_array($skipEmail, [0, 1], true)) {
             throw new D4SignInvalidArgumentException('O campo "skip_email" deve ser "0" ou "1".');
         }
 
         $this->skipEmail = $skipEmail;
 
-        if (! in_array($workflow, ['0', '1'], true)) {
+        if (! in_array($workflow, [0, 1], true)) {
             throw new D4SignInvalidArgumentException('O campo "workflow" deve ser "0" ou "1".');
         }
 
