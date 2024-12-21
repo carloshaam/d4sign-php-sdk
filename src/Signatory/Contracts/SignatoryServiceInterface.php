@@ -103,11 +103,10 @@ interface SignatoryServiceInterface
      * Lista os PINs principais de um documento.
      *
      * @param string $documentId ID do documento.
-     * @param array $fields Dados adicionais para filtrar os resultados.
      *
      * @return HttpResponseInterface Resposta HTTP contendo a lista de PINs.
      */
-    public function listMainDocumentPins(string $documentId, array $fields): HttpResponseInterface;
+    public function listMainDocumentPins(string $documentId): HttpResponseInterface;
 
     /**
      * Adiciona informações ao signatário de um documento.
@@ -122,23 +121,22 @@ interface SignatoryServiceInterface
     /**
      * Define o tipo de assinatura de um signatário em um documento.
      *
-     * @param string $documentId ID do documento.
+     * @param string $userId ID do usuário.
      * @param array $fields Dados contendo o tipo de assinatura a ser definido.
      *
      * @return HttpResponseInterface Resposta HTTP com o status da operação.
      */
-    public function addSignatorySignatureType(string $documentId, array $fields): HttpResponseInterface;
+    public function addSignatorySignatureType(string $userId, array $fields): HttpResponseInterface;
 
     /**
      * Obtém detalhes de um grupo de signatários associado a um documento.
      *
      * @param string $documentId ID do documento.
      * @param string $groupId ID do grupo de signatários.
-     * @param array $fields Dados adicionais para refinar os detalhes retornados.
      *
      * @return HttpResponseInterface Resposta HTTP contendo os detalhes do grupo.
      */
-    public function getSignatoryGroupDetails(string $documentId, string $groupId, array $fields): HttpResponseInterface;
+    public function getSignatoryGroupDetails(string $documentId, string $groupId): HttpResponseInterface;
 
     /**
      * Copia o link de assinatura de um signatário específico.

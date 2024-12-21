@@ -11,21 +11,27 @@ class UpdateSignatoryAccessCodeFields implements UpdateSignatoryAccessCodeFields
 {
     private string $email;
     private ?string $passwordCode = null;
-    private string $keySigner;
+    private ?string $keySigner = null;
 
-    public function __construct(string $email, string $keySigner)
+    public function __construct(string $email)
     {
         if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new D4SignInvalidArgumentException("O e-mail do signatário '$email' não é válido.");
         }
 
         $this->email = $email;
-        $this->keySigner = $keySigner;
     }
 
     public function setPasswordCode(string $passwordCode): self
     {
         $this->passwordCode = $passwordCode;
+
+        return $this;
+    }
+
+    public function setKeySigner(string $keySigner): self
+    {
+        $this->keySigner = $keySigner;
 
         return $this;
     }

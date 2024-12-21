@@ -171,10 +171,10 @@ class SignatoryService implements SignatoryServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function listMainDocumentPins(string $documentId, array $fields): HttpResponse
+    public function listMainDocumentPins(string $documentId): HttpResponse
     {
         try {
-            return $this->httpClient->post("documents/$documentId/listpins", $fields);
+            return $this->httpClient->get("documents/$documentId/listpins");
         } catch (\Throwable $e) {
             throw new D4SignConnectException(
                 "Error listing PINs for document $documentId: " . $e->getMessage(),
@@ -203,13 +203,13 @@ class SignatoryService implements SignatoryServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function addSignatorySignatureType(string $documentId, array $fields): HttpResponse
+    public function addSignatorySignatureType(string $userId, array $fields): HttpResponse
     {
         try {
-            return $this->httpClient->post("documents/$documentId/addsignaturetype", $fields);
+            return $this->httpClient->post("documents/$userId/addsignaturetype", $fields);
         } catch (\Throwable $e) {
             throw new D4SignConnectException(
-                "Error adding signature type to signer in document $documentId: " . $e->getMessage(),
+                "Error adding signature type to signer in user $userId: " . $e->getMessage(),
                 $e->getCode(),
                 $e,
             );
@@ -219,10 +219,10 @@ class SignatoryService implements SignatoryServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function getSignatoryGroupDetails(string $documentId, string $groupId, array $fields): HttpResponse
+    public function getSignatoryGroupDetails(string $documentId, string $groupId): HttpResponse
     {
         try {
-            return $this->httpClient->post("documents/$documentId/groupdetails/$groupId", $fields);
+            return $this->httpClient->get("documents/$documentId/groupdetails/$groupId");
         } catch (\Throwable $e) {
             throw new D4SignConnectException(
                 "Error getting signer group details on document $documentId: " . $e->getMessage(),
