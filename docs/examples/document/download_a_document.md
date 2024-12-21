@@ -21,7 +21,7 @@ try {
 
     $document = $d4sign->documents()->downloadDocument('uuid-document', $fields);
 
-    echo print_r($document->json(), true);
+    echo print_r($document->getJson(), true);
 } catch (\Exception $e) {
     echo $e->getMessage();
 }

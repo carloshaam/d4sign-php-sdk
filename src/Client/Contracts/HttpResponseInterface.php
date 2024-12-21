@@ -8,19 +8,29 @@ interface HttpResponseInterface
 {
     public function status(): int;
 
-    public function body(): string;
+    public function getBody(): string;
 
-    public function json(): array;
+    public function getJson(): array;
 
-    public function headers(): array;
+    public function getHeaders(): array;
 
-    public function getHeader(string $name): ?string;
+    public function getHeader(string $name): ?array;
 
     public function hasHeader(string $name): bool;
 
+    public function getContentType(): ?string;
+
+    public function getCookies(): array;
+
     public function isSuccess(): bool;
+
+    public function isCreated(): bool;
+
+    public function isRedirect(): bool;
 
     public function isClientError(): bool;
 
     public function isServerError(): bool;
+
+    public function rawResponse(): array;
 }

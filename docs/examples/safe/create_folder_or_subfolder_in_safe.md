@@ -20,7 +20,7 @@ try {
 
     $safe = $d4sign->safes()->createFolder('uuid-safe', $fields);
 
-    echo print_r($safe->json(), true);
+    echo print_r($safe->getJson(), true);
 } catch (\Exception $e) {
     echo $e->getMessage();
 }

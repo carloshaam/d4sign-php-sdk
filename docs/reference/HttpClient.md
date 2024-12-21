@@ -27,6 +27,39 @@ configuração e envio de requisições.
     - [withDigestAuth]()
     - [withCookies]()
     - [timeout]()
+    - [updateConfiguration]()
+    - [withHandler]()
+    - [download]()
+    - [Métodos HTTP]()
+        - [get]()
+        - [post]()
+        - [put]()
+        - [delete]()
+
+- [Tratamento de Exceções]()
+- [Casos de Uso]()
+- [Limitações Conhecidas]()
+- [Melhores Práticas]()
+
+- [Visão Geral]()
+- [Requisitos]()
+- [Construtor]()
+- [Métodos Estáticos]()
+    - [new]()
+
+- [Métodos Públicos]()
+    - [baseUrl]()
+    - [withOptions]()
+    - [withoutRedirecting]()
+    - [withoutVerifying]()
+    - [asJson]()
+    - [asFormParams]()
+    - [asMultipart]()
+    - [withHeaders]()
+    - [withBasicAuth]()
+    - [withDigestAuth]()
+    - [withCookies]()
+    - [timeout]()
     - [Métodos HTTP]()
         - [get]()
         - [post]()
@@ -50,7 +83,7 @@ Entre suas funcionalidades, incluem-se:
 ## Requisitos
 
 - **Versão do PHP:** 7.4+
-- **Dependência:** [GuzzleHttp]()
+- **Dependência:** [GuzzleHttp](https://docs.guzzlephp.org/en/stable/)
 
 ## Construtor
 
@@ -106,7 +139,10 @@ public static function new(array $config = []): self
 #### Exemplo
 
 ``` php
-$http = HttpClient::new()->baseUrl('https://api.exemplo.com');
+$http = HttpClient::new()
+    ->baseUrl('https://api.exemplo.com')
+    ->timeout(15)
+    ->withHeaders(['Custom' => 'Value']);
 ```
 
 ## Métodos Públicos
@@ -252,13 +288,88 @@ public function withBasicAuth(string $username, string $password): self
 
 #### Descrição
 
-Define o limite de tempo de uma requisição.
+``` php
+public function timeout(float|int $seconds): self
+```
+
+Define o limite de tempo de uma requisição em segundos.
 
 #### Sintaxe
 
 ``` php
 public function timeout(int $seconds): self
 ```
+
+## Métodos Públicos Adicionais
+
+### updateConfiguration
+
+#### Descrição
+
+Atualiza as configurações do cliente sem precisar recriar a instância.
+
+#### Sintaxe
+
+``` php
+public function updateConfiguration(array $config): self
+```
+
+#### Parâmetros
+
+- **`config`** _(array)_: Configuração adicional ou substituta.
+
+#### Exemplo
+
+``` php
+$http->updateConfiguration([
+    'headers' => ['Custom-Header' => 'Value']
+]);
+```
+
+### withHandler
+
+#### Descrição
+
+Define um handler personalizado no Guzzle para manipulação direta das requisições.
+
+#### Sintaxe
+
+``` php
+public function withHandler(callable $handler): self
+```
+
+#### Exemplo
+
+``` php
+$http->withHandler(function (RequestInterface $request) {
+    // Customize comportamento do request.
+});
+```
+
+### download
+
+#### Descrição
+
+Faz o download de um arquivo a partir de uma URL e salva em um diretório local.
+
+#### Sintaxe
+
+``` php
+public function download(string $uri, string $destination): void
+```
+
+#### Parâmetros
+
+- **`uri`** _(string)_: URI ou endpoint para download.
+- **`destination`** _(string)_: Caminho local para o arquivo salvo.
+
+#### Exemplo
+
+``` php
+$http->download('/arquivo.zip', '/local/arquivo.zip');
+```
+
+## Métodos HTTP
 
 ## Métodos HTTP
 
@@ -278,7 +389,11 @@ public function get(string $uri, array $params = []): HttpResponse
 
 ``` php
 $response = $http->get('/endpoint', ['chave' => 'valor']);
-```
+$response = $http->get(
+    '/endpoint',
+    ['chave' => 'valor'],
+    ['X-Header' => 'Value']
+);
 
 ### post
 
@@ -313,15 +428,29 @@ Envia uma requisição `DELETE`.
 #### Sintaxe
 
 ``` php
-public function delete(string $uri, array $params = []): HttpResponse
+``` php
+public function delete(string $uri, array $params = [], array $headers = []): HttpResponse
 ```
 
 ## Tratamento de Exceções
 
-A classe lança exceções personalizadas nas seguintes situações:
+## Tratamento de Exceções
 
-- **`D4SginUnauthorizedException`**: Quando a chave API está inválida ou expirada (401 Unauthorized).
-- **`D4SignHttpClientException`**: Para erros de HTTP (como requisições malformadas ou falhas no Guzzle).
+A classe lança as seguintes exceções personalizadas:
 
-Essa documentação cobre os principais métodos da classe. Explore o restante da API para maiores personalizações e
-automações!
+- **`D4SginUnauthorizedException`**
+    - Quando a chave API está inválida ou expirada.
+    - Código HTTP retornado: `401 Unauthorized`.
+    - Solução: Revise seu `tokenAPI` ou envie uma nova requisição para renovar o token.
+
+- **`D4SignHttpClientException`**
+    - Lançada em falhas inesperadas da comunicação HTTP.
+    - Exemplos: Requisições malformadas, falha de DNS, sem conexão com o servidor.
+    - Solução: Inspecione as mensagens retornadas no corpo da exceção.
+
+- **`D4SignNotFoundException`**
+    - Quando o recurso solicitado não é encontrado no endpoint.
+    - Código HTTP retornado: `404 Not Found`.
+    - Solução: Verifique o URI e se o recurso é válido.
+      Essa documentação cobre os principais métodos da classe. Explore o restante da API para maiores personalizações e
+      automações!

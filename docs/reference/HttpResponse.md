@@ -16,9 +16,14 @@ do cliente, ou erro do servidor).
     - [headers]()
     - [getHeader]()
     - [hasHeader]()
+    - [getContentType]()
+    - [getCookies]()
     - [isSuccess]()
+    - [isCreated]()
+    - [isRedirect]()
     - [isClientError]()
     - [isServerError]()
+    - [rawResponse]()
 
 ## Visão Geral
 
@@ -132,7 +137,8 @@ public function json(): array
 
 #### Exceções
 
-- Lança uma `RuntimeException` caso o corpo da resposta não seja um JSON válido.
+- Lança uma `RuntimeException` com a flag `JSON_THROW_ON_ERROR` ativada caso o corpo da resposta não seja um JSON
+  válido.
 
 #### Exemplo
 
@@ -284,6 +290,8 @@ $isServerError = $response->isServerError(); // Retorna false
 ## Observações
 
 Os métodos oferecidos pela `HttpResponse` facilitam a manipulação e análise das respostas HTTP, com foco especial em
+
+```
 APIs RESTful. É possível validar status, extrair cabeçalhos, formatar o corpo da resposta, ou realizar verificações
 úteis para o fluxo da aplicação.
 Esta documentação foi criada para a classe `HttpResponse`. Caso tenha dúvidas ou sugestões, entre em contato ou colabore

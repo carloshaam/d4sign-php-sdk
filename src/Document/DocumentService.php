@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace D4Sign\Document;
 
-use D4Sign\Client\HttpClient;
+use D4Sign\Client\Contracts\HttpClientInterface;
 use D4Sign\Client\HttpResponse;
 use D4Sign\Document\Contracts\{
     CancelDocumentFieldsInterface,
@@ -18,9 +18,9 @@ use D4Sign\Exceptions\D4SignConnectException;
 
 class DocumentService implements DocumentServiceInterface
 {
-    private HttpClient $httpClient;
+    private HttpClientInterface $httpClient;
 
-    public function __construct(HttpClient $httpClient)
+    public function __construct(HttpClientInterface $httpClient)
     {
         $this->httpClient = $httpClient;
     }

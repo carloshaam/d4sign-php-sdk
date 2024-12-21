@@ -24,12 +24,12 @@ class HttpResponse implements HttpResponseInterface
         return $this->status;
     }
 
-    public function body(): string
+    public function getBody(): string
     {
         return $this->body;
     }
 
-    public function json(): array
+    public function getJson(): array
     {
         try {
             return json_decode($this->body, true, 512, JSON_THROW_ON_ERROR);
@@ -38,29 +38,23 @@ class HttpResponse implements HttpResponseInterface
         }
     }
 
-    public function headers(): array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    /**
-     * Retrieve a specific header by name in a case-insensitive way.
-     */
-    public function getHeader(string $name): ?string
+    public function getHeader(string $name): ?array
     {
         $key = strtolower($name);
         foreach ($this->headers as $headerName => $headerValue) {
             if (strtolower($headerName) === $key) {
-                return is_array($headerValue) ? implode(', ', $headerValue) : $headerValue;
+                return (array)$headerValue;
             }
         }
 
         return null;
     }
 
-    /**
-     * Check if the response has a specific header.
-     */
     public function hasHeader(string $name): bool
     {
         $key = strtolower($name);
@@ -73,9 +67,29 @@ class HttpResponse implements HttpResponseInterface
         return false;
     }
 
+    public function getContentType(): ?string
+    {
+        return $this->getHeader('Content-Type')[0] ?? null;
+    }
+
+    public function getCookies(): array
+    {
+        return $this->getHeader('Set-Cookie') ?? [];
+    }
+
     public function isSuccess(): bool
     {
         return $this->status >= 200 && $this->status < 300;
+    }
+
+    public function isCreated(): bool
+    {
+        return $this->status() >= 201 && $this->status() <= 299;
+    }
+
+    public function isRedirect(): bool
+    {
+        return $this->status() >= 300 && $this->status() <= 399;
     }
 
     public function isClientError(): bool
@@ -86,5 +100,14 @@ class HttpResponse implements HttpResponseInterface
     public function isServerError(): bool
     {
         return $this->status >= 500;
+    }
+
+    public function rawResponse(): array
+    {
+        return [
+            'status' => $this->status(),
+            'body' => $this->getBody(),
+            'headers' => $this->getHeaders(),
+        ];
     }
 }

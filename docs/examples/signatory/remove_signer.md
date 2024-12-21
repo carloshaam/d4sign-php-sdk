@@ -19,7 +19,7 @@ try {
 
     $signatory = $d4sign->signatories()->removeSignatory('uuid-document', $fields);
 
-    echo print_r($signatory->json(), true);
+    echo print_r($signatory->getJson(), true);
 } catch (\Exception $e) {
     echo $e->getMessage();
 }

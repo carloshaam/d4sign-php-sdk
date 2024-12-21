@@ -16,7 +16,7 @@ $d4sign = new D4Sign(
 try {
     $template = $d4sign->documents()->listTemplates();
 
-    echo print_r($template->json(), true);
+    echo print_r($template->getJson(), true);
 } catch (\Exception $e) {
     echo $e->getMessage();
 }

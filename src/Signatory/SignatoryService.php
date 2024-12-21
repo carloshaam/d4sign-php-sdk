@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace D4Sign\Signatory;
 
-use D4Sign\Client\HttpClient;
+use D4Sign\Client\Contracts\HttpClientInterface;
 use D4Sign\Client\HttpResponse;
 use D4Sign\Exceptions\D4SignConnectException;
 use D4Sign\Signatory\Contracts\CreateSignatoryInformationFieldsInterface;
@@ -17,9 +17,9 @@ use D4Sign\Signatory\Contracts\UpdateSignatorySmsNumberFieldsInterface;
 
 class SignatoryService implements SignatoryServiceInterface
 {
-    private HttpClient $httpClient;
+    private HttpClientInterface $httpClient;
 
-    public function __construct(HttpClient $httpClient)
+    public function __construct(HttpClientInterface $httpClient)
     {
         $this->httpClient = $httpClient;
     }

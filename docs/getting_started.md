@@ -3,6 +3,17 @@
 Esta documentação foi criada para auxiliar desenvolvedores a integrarem a SDK da D4Sign utilizando **PHP**. Aqui estão
 os tópicos essenciais para realizar a instalação, configuração e uso desse recurso.
 
+## Índice
+
+- [1. Autoloading & Namespaces](#1-autoloading--namespaces)
+- [2. Requisitos do sistema](#2-requisitos-do-sistema)
+- [3. Instalando a SDK da D4Sign para PHP](#3-instalando-a-sdk-da-d4sign-para-php)
+- [4. Configuração e Inicialização](#4-configuração-e-inicialização)
+- [5. Autenticação e Autorização](#5-autenticação-e-autorização)
+- [6. Fazendo Requisições – Exemplo](#6-fazendo-requisições--exemplo)
+- [7. Próximos Passos](#7-próximos-passos)
+- [8. Suporte](#8-suporte)
+
 ## 1. Autoloading & Namespaces
 
 O D4Sign SDK para PHP é codificado conforme **PSR-4**. Isso significa que ele depende muito de namespaces
@@ -62,15 +73,26 @@ $d4sign = new D4Sign(
     '{cryptKey}'      // Substitua pela sua chave de criptografia
 );
 ```
+### Alternando entre os Ambientes de Produção e Sandbox
 
-O URL base da API é configurado automaticamente para o modo `produção`. Caso prefira o ambiente de homologação, forneça a
-URL no construtor:
+A API possui dois ambientes disponíveis:
+
+- **Produção**: Utilizado para operações reais. URL: `https://secure.d4sign.com.br/api/v1`
+- **Sandbox (Homologação)**: Utilizado para testes. URL: `https://sandbox.d4sign.com.br/api/v1`
+
+O ambiente pode ser alternado configurando dinamicamente o URL base durante a inicialização:
 
 ``` php
+$production = true; // Ajuste para 'false' caso queira usar o ambiente Sandbox
+
+$baseUrl = $production 
+    ? 'https://secure.d4sign.com.br/api/v1'
+    : 'https://sandbox.d4sign.com.br/api/v1';
+
 $d4sign = new D4Sign(
     '{tokenAPI}',
     '{cryptKey}',
-    'https://sandbox.d4sign.com.br/api/v1' // URL de homologação
+    $baseUrl
 );
 ```
 
@@ -86,7 +108,25 @@ cryptKey: SUA_CRYPT_KEY
 ```
 
 A biblioteca `D4SignClient` lida com todas as requisições HTTP, garantindo que os cabeçalhos corretos sejam enviados em
-cada requisição.
+cada requisição. No caso de falhas, lançará exceções que podem ser tratadas.
+
+#### Tratando Exceções
+
+A SDK utiliza exceções para indicar falhas em operações. Aqui está um exemplo de tratamento de erro:
+
+``` php
+try {
+    $documentos = $d4sign->documents()->listDocuments();
+} catch (\Exception $e) {
+    echo "Erro ao listar documentos: " . $e->getMessage();
+}
+```
+
+Principais erros:
+
+- **401 Unauthorized**: Credenciais inválidas. Verifique `tokenAPI` ou `cryptKey`.
+- **413 Payload Too Large**: Limite de tamanho do documento foi excedido.
+- **500 Server Error**: Problema interno no servidor D4Sign.
 
 ## 6. Fazendo Requisições – Exemplo
 
@@ -150,7 +190,47 @@ echo "Signatário removido.";
 
 ### 6.4 Webhooks
 
-Cadastre webhooks para notificação sobre o status dos documentos:
+A API D4Sign permite gerenciar webhooks para notificação sobre eventos de documentos. Você pode listar, criar, atualizar e excluir webhooks.
+
+#### Listar Webhooks Existentes
+
+``` php
+$webhooks = $d4sign->webhooks()->listWebhooks();
+
+foreach ($webhooks as $webhook) {
+    echo $webhook['uuid'] . " - " . $webhook['webhook_url'] . PHP_EOL;
+}
+```
+
+#### Criar um Novo Webhook
+
+``` php
+use D4Sign\Webhook\CreateWebhookFields;
+
+$fields = new CreateWebhookFields('https://meuwebhook.com/callback', ['DOCUMENT_SIGNED']);
+$webhook = $d4sign->webhooks()->createWebhook('uuid-document', $fields);
+
+echo "Webhook criado com sucesso! UUID: " . $webhook['uuid'];
+```
+
+#### Atualizar um Webhook Existente
+
+``` php
+use D4Sign\Webhook\UpdateWebhookFields;
+
+$fields = new UpdateWebhookFields('https://meuwebhook.com/novo_callback', ['DOCUMENT_REJECTED']);
+$d4sign->webhooks()->updateWebhook('uuid-webhook', $fields);
+
+echo "Webhook atualizado com sucesso!";
+```
+
+#### Excluir um Webhook
+
+``` php
+$d4sign->webhooks()->deleteWebhook('uuid-webhook');
+
+echo "Webhook excluído com sucesso!";
+```
 
 ``` php
 $webhooks = $d4sign->webhooks()->listWebhooks();

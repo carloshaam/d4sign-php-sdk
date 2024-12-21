@@ -16,7 +16,7 @@ $d4sign = new D4Sign(
 try {
     $safes = $d4sign->safes()->listSafes();
 
-    echo print_r($safes->json(), true);
+    echo print_r($safes->getJson(), true);
 } catch (\Exception $e) {
     echo $e->getMessage();
 }
