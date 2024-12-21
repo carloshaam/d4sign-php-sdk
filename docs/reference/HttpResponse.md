@@ -137,13 +137,13 @@ public function json(): array
 
 #### Exceções
 
-- Lança uma `RuntimeException` com a flag `JSON_THROW_ON_ERROR` ativada caso o corpo da resposta não seja um JSON
+- Lança uma `D4SignRuntimeException` com a flag `JSON_THROW_ON_ERROR` ativada caso o corpo da resposta não seja um JSON
   válido.
 
 #### Exemplo
 
 ``` php
-$data = $response->json(); // Retorna ['success' => true, 'data' => []]
+$data = $response->getJson(); // Retorna ['success' => true, 'data' => []]
 ```
 
 ### headers

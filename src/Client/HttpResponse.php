@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace D4Sign\Client;
 
 use D4Sign\Client\Contracts\HttpResponseInterface;
+use D4Sign\Exceptions\D4SignInvalidJsonException;
 
 class HttpResponse implements HttpResponseInterface
 {
@@ -34,7 +35,7 @@ class HttpResponse implements HttpResponseInterface
         try {
             return json_decode($this->body, true, 512, JSON_THROW_ON_ERROR);
         } catch (\JsonException $e) {
-            throw new \RuntimeException('Invalid JSON body: ' . $e->getMessage());
+            throw new D4SignInvalidJsonException('Invalid JSON body: ' . $e->getMessage());
         }
     }
 

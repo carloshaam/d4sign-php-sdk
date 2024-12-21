@@ -140,7 +140,7 @@ Vamos listar os documentos armazenados na API utilizando o serviço de documento
 ``` php
 $documentos = $d4sign->documents()->listDocuments();
 
-print_r($documentos->json());
+print_r($documentos->getJson());
 ```
 
 ### 6.2 Enviar Documento para um Cofre
@@ -157,7 +157,7 @@ $fields->setUuidFolder('uuid-folder'); // Para associar a um diretório
 // Enviando o documento
 $documento = $d4sign->documents()->uploadDocumentToSafe('uuid-safe', $fields);
 
-echo "Documento enviado com sucesso!" . $documento->json();
+echo "Documento enviado com sucesso!" . $documento->getJson();
 ```
 
 ### 6.3 Gerenciar Signatários

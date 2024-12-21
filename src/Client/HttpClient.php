@@ -8,6 +8,7 @@ use D4Sign\Client\Contracts\HttpClientInterface;
 use D4Sign\Client\Contracts\HttpResponseInterface;
 use D4Sign\Exceptions\D4SginUnauthorizedException;
 use D4Sign\Exceptions\D4SignHttpClientException;
+use D4Sign\Exceptions\D4SignRuntimeException;
 use D4Sign\Utils\HttpCode;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -336,8 +337,8 @@ class HttpClient implements HttpClientInterface
     public function download(string $uri, string $destination): HttpResponseInterface
     {
         try {
-            if (!is_writable(dirname($destination))) {
-                throw new \RuntimeException("Directory is not writable: " . dirname($destination));
+            if (! is_writable(dirname($destination))) {
+                throw new D4SignRuntimeException("Directory is not writable: " . dirname($destination));
             }
 
             $this->client->request('GET', $uri, [
