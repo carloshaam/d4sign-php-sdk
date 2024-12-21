@@ -36,5 +36,32 @@ interface TagServiceInterface
      *
      * @return HttpResponseInterface A resposta após tentar remover a tag do documento.
      */
-    public function removeTagToDocument(string $documentId, array $fields): HttpResponseInterface;
+    public function removeTagFromDocument(string $documentId, array $fields): HttpResponseInterface;
+
+    /**
+     * Remove todas as tags associadas a um documento.
+     *
+     * @param string $documentId O identificador exclusivo do documento.
+     *
+     * @return HttpResponseInterface A resposta da API indicando o status da operação.
+     */
+    public function removeAllTagsFromDocument(string $documentId): HttpResponseInterface;
+
+    /**
+     * Adiciona uma tag "Urgent" ao documento.
+     *
+     * @param string $documentId O identificador exclusivo do documento.
+     *
+     * @return HttpResponseInterface A resposta da API indicando o status da operação.
+     */
+    public function addUrgentTagToDocument(string $documentId): HttpResponseInterface;
+
+    /**
+     * Remove a tag "Urgent" de um documento.
+     *
+     * @param string $documentId O identificador exclusivo do documento.
+     *
+     * @return HttpResponseInterface A resposta da API indicando o status da operação.
+     */
+    public function removeUrgentTagFromDocument(string $documentId): HttpResponseInterface;
 }

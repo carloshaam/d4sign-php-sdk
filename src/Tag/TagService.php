@@ -28,7 +28,7 @@ class TagService implements TagServiceInterface
             return $this->httpClient->get("tags/$documentId", ['pg' => $page]);
         } catch (\Throwable $e) {
             throw new D4SignConnectException(
-                "Error listing tags from document $documentId: " . $e->getMessage(),
+                "Failed to list tags for document ID $documentId. Error: " . $e->getMessage(),
                 $e->getCode(),
                 $e
             );
@@ -44,7 +44,7 @@ class TagService implements TagServiceInterface
             return $this->httpClient->post("tags/$documentId/add", $fields);
         } catch (\Throwable $e) {
             throw new D4SignConnectException(
-                "Error adding tag to document $documentId: " . $e->getMessage(),
+                "Failed to add a tag to document ID $documentId. Error: " . $e->getMessage(),
                 $e->getCode(),
                 $e
             );
@@ -54,13 +54,61 @@ class TagService implements TagServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function removeTagToDocument(string $documentId, array $fields): HttpResponseInterface
+    public function removeTagFromDocument(string $documentId, array $fields): HttpResponseInterface
     {
         try {
             return $this->httpClient->post("tags/$documentId/remove", $fields);
         } catch (\Throwable $e) {
             throw new D4SignConnectException(
-                "Error removing tag from $documentId: " . $e->getMessage(),
+                "Failed to remove a specified tag from document ID $documentId. Error: " . $e->getMessage(),
+                $e->getCode(),
+                $e
+            );
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAllTagsFromDocument(string $documentId): HttpResponseInterface
+    {
+        try {
+            return $this->httpClient->post("tags/$documentId/erase");
+        } catch (\Throwable $e) {
+            throw new D4SignConnectException(
+                "Failed to remove all tags from document ID $documentId. Error: " . $e->getMessage(),
+                $e->getCode(),
+                $e
+            );
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addUrgentTagToDocument(string $documentId): HttpResponseInterface
+    {
+        try {
+            return $this->httpClient->post("tags/$documentId/addurgent");
+        } catch (\Throwable $e) {
+            throw new D4SignConnectException(
+                "Failed to add the 'Urgent' tag to document ID $documentId. Error: " . $e->getMessage(),
+                $e->getCode(),
+                $e
+            );
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeUrgentTagFromDocument(string $documentId): HttpResponseInterface
+    {
+        try {
+            return $this->httpClient->post("tags/$documentId/addremoveurgent");
+        } catch (\Throwable $e) {
+            throw new D4SignConnectException(
+                "Failed to remove the 'Urgent' tag from document ID $documentId. Error: " . $e->getMessage(),
                 $e->getCode(),
                 $e
             );

@@ -16,7 +16,7 @@ $d4sign = new D4Sign(
 try {
     $fields = ['tag' => 'hot'];
 
-    $safes = $d4sign->tags()->removeTagToDocument('uuid-document', $fields);
+    $safes = $d4sign->tags()->removeTagFromDocument('uuid-document', $fields);
 
     echo print_r($safes->getJson(), true);
 } catch (\Exception $e) {
