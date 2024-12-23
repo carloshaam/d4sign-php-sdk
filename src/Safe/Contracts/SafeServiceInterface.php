@@ -29,6 +29,15 @@ interface SafeServiceInterface
     public function listDocumentsBySafe(string $safeId, int $page = 1): HttpResponseInterface;
 
     /**
+     * Obtém lista de todas as pasta dentro do cofre.
+     *
+     * @param string $safeId ID do cofre.
+     *
+     * @return HttpResponseInterface Retorna a resposta da API com os detalhes das pastas.
+     */
+    public function listFolderBySafe(string $safeId): HttpResponseInterface;
+
+    /**
      * Lista documentos de um cofre numa pasta específica.
      *
      * @param string $safeId ID do cofre.
@@ -44,15 +53,6 @@ interface SafeServiceInterface
     ): HttpResponseInterface;
 
     /**
-     * Obtém lista de todas as pasta dentro do cofre.
-     *
-     * @param string $safeId ID do cofre.
-     *
-     * @return HttpResponseInterface Retorna a resposta da API com os detalhes das pastas.
-     */
-    public function listFolderBySafe(string $safeId): HttpResponseInterface;
-
-    /**
      * Cria uma nova pasta dentro de um cofre.
      *
      * @param string $safeId ID do cofre onde a pasta será criada.
@@ -66,11 +66,11 @@ interface SafeServiceInterface
      * Renomeia uma pasta existente num cofre.
      *
      * @param string $safeId ID do cofre onde a pasta está localizada.
-     * @param array $fields Dados necessários para renomear a pasta.
+     * @param CreateFolderFieldsInterface $fields Dados necessários para renomear a pasta.
      *
      * @return HttpResponseInterface Retorna a resposta da API após a renomeação.
      */
-    public function renameFolder(string $safeId, array $fields): HttpResponseInterface;
+    public function renameFolder(string $safeId, CreateFolderFieldsInterface $fields): HttpResponseInterface;
 
     /**
      * Cria documentos em lote num cofre.

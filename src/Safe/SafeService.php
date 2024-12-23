@@ -54,13 +54,13 @@ class SafeService implements SafeServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function listDocumentsBySafeAndFolder(string $safeId, string $folderId, int $page = 1): HttpResponse
+    public function listFolderBySafe(string $safeId): HttpResponse
     {
         try {
-            return $this->httpClient->get("documents/$safeId/safe/{$folderId}", ['pg' => $page]);
+            return $this->httpClient->get("folders/$safeId/find");
         } catch (\Throwable $e) {
             throw new D4SignConnectException(
-                "Error listing documents from folder $folderId in safe $safeId: " . $e->getMessage(),
+                "Error getting folder list from safe $safeId: " . $e->getMessage(),
                 $e->getCode(),
                 $e,
             );
@@ -70,13 +70,13 @@ class SafeService implements SafeServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function listFolderBySafe(string $safeId): HttpResponse
+    public function listDocumentsBySafeAndFolder(string $safeId, string $folderId, int $page = 1): HttpResponse
     {
         try {
-            return $this->httpClient->get("folders/$safeId/find");
+            return $this->httpClient->get("documents/$safeId/safe/$folderId", ['pg' => $page]);
         } catch (\Throwable $e) {
             throw new D4SignConnectException(
-                "Error getting folder list from safe $safeId: " . $e->getMessage(),
+                "Error listing documents from folder $folderId in safe $safeId: " . $e->getMessage(),
                 $e->getCode(),
                 $e,
             );
@@ -102,10 +102,10 @@ class SafeService implements SafeServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function renameFolder(string $safeId, array $fields): HttpResponse
+    public function renameFolder(string $safeId, CreateFolderFieldsInterface $fields): HttpResponse
     {
         try {
-            return $this->httpClient->post("folders/$safeId/rename", $fields);
+            return $this->httpClient->post("folders/$safeId/rename", $fields->toArray());
         } catch (\Throwable $e) {
             throw new D4SignConnectException(
                 "Error renaming folder in safe $safeId: " . $e->getMessage(),
