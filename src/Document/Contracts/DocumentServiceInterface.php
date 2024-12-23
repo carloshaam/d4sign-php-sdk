@@ -107,7 +107,7 @@ interface DocumentServiceInterface
      * @param string $documentId ID do documento.
      * @param DownloadDocumentFieldsInterface|null $fields Configurações do download (como formato ou opções adicionais).
      *
-     * @return HttpResponseInterface Retorna o conteúdo do documento em binário ou base64.
+     * @return HttpResponseInterface Retorna uma URL final para download do documento.
      */
     public function downloadDocument(string $documentId, ?DownloadDocumentFieldsInterface $fields): HttpResponseInterface;
 
@@ -152,9 +152,9 @@ interface DocumentServiceInterface
      * Gera um link para download de um documento.
      *
      * @param string $documentId ID do documento.
-     * @param array $fields Configurações do link de download (como validade, senha, etc.).
+     * @param DownloadDocumentFieldsInterface|null $fields Configurações do link de download (como validade, senha, etc.).
      *
      * @return HttpResponseInterface Retorna a resposta da API com o link gerado.
      */
-    public function generateDocumentDownloadLink(string $documentId, array $fields): HttpResponseInterface;
+    public function generateDocumentDownloadLink(string $documentId, ?DownloadDocumentFieldsInterface $fields): HttpResponseInterface;
 }

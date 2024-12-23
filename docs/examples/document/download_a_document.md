@@ -15,8 +15,7 @@ $d4sign = new D4Sign(
 );
 
 try {
-    $fields = new DownloadDocumentFields();
-    $fields->setType('PDF');
+    $fields = new DownloadDocumentFields(); // opcional
     $fields->setLanguage('en');
 
     $document = $d4sign->documents()->downloadDocument('uuid-document', $fields);

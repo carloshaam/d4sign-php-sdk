@@ -8,16 +8,18 @@ use D4Sign\Document\Contracts\CancelDocumentFieldsInterface;
 
 class CancelDocumentFields implements CancelDocumentFieldsInterface
 {
-    private string $comment;
+    private ?string $comment;
 
     /**
      * Construtor principal.
      *
-     * @param string $comment Comentário explicando o cancelamento.
+     * @param string|null $comment Comentário explicando o cancelamento.
      */
-    public function __construct(string $comment)
+    public function setComment(?string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
     }
 
     /**

@@ -159,10 +159,12 @@ class DocumentService implements DocumentServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function cancelDocument(string $documentId, CancelDocumentFieldsInterface $fields): HttpResponse
+    public function cancelDocument(string $documentId, CancelDocumentFieldsInterface $fields = null): HttpResponse
     {
         try {
-            return $this->httpClient->post("documents/$documentId/cancel", $fields->toArray());
+            $fields = $fields ? $fields->toArray() : [];
+
+            return $this->httpClient->post("documents/$documentId/cancel", $fields);
         } catch (\Throwable $e) {
             throw new D4SignConnectException(
                 "Error canceling document $documentId: " . $e->getMessage(),
@@ -257,9 +259,11 @@ class DocumentService implements DocumentServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function generateDocumentDownloadLink(string $documentId, array $fields): HttpResponse
+    public function generateDocumentDownloadLink(string $documentId, DownloadDocumentFieldsInterface $fields = null): HttpResponse
     {
         try {
+            $fields = $fields ? $fields->toArray() : [];
+
             return $this->httpClient->post("documents/$documentId/download", $fields);
         } catch (\Throwable $e) {
             throw new D4SignConnectException(
