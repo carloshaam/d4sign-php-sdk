@@ -22,7 +22,7 @@ Os namespaces disponíveis estão no formato `D4Sign\[SubNamespace]` e são usad
 serviços da API (exemplo: documentos, signatários, cofres, etc.).
 Exemplo básico de utilização de namespaces:
 
-``` php
+```php
 use D4Sign\Document\DocumentService;
 ```
 
@@ -36,7 +36,8 @@ eficiente de arquivos na sua aplicação PHP, tornando o processo muito mais ág
 
 Os seguintes requisitos são necessários para o funcionamento da SDK:
 
-- **PHP 7.4 ou superior**: Garantimos compatibilidade com as versões mais recentes do PHP para aproveitar os recursos modernos da linguagem.
+- **PHP 7.4 ou superior**: Garantimos compatibilidade com as versões mais recentes do PHP para aproveitar os recursos
+  modernos da linguagem.
 - **Extensões PHP**:
     - `curl` - Para realizar as requisições HTTP.
     - `mbstring` - Para manipulação de strings.
@@ -49,12 +50,13 @@ Os seguintes requisitos são necessários para o funcionamento da SDK:
 O Composer é o gerenciador de dependências mais utilizado no ecossistema PHP. Para instalar a SDK da D4Sign com
 Composer, utilize o comando:
 
-``` bash
+```bash
 composer require carloshaam/d4sign-sdk
 ```
 
 Isso irá baixar a SDK e suas dependências automaticamente para o diretório `vendor/`.
-Caso ainda não tenha o Composer instalado, siga as instruções de instalação no [site oficial do Composer](https://getcomposer.org/).
+Caso ainda não tenha o Composer instalado, siga as instruções de instalação
+no [site oficial do Composer](https://getcomposer.org/).
 
 ## 4. Configuração e Inicialização
 
@@ -64,7 +66,7 @@ Antes de fazer qualquer requisição à API da D4Sign, é necessário configurar
 
 Utilize o token da API (`tokenAPI`) e a chave de criptografia (`cryptKey`) fornecidos pela D4Sign.
 
-``` php
+```php
 use D4Sign\D4Sign;
 
 // Configurando a D4Sign
@@ -73,6 +75,31 @@ $d4sign = new D4Sign(
     '{cryptKey}'      // Substitua pela sua chave de criptografia
 );
 ```
+
+#### 4.1.1 Instanciar a SDK Manualmente com HttpClient
+
+```php
+use D4Sign\Client\HttpClient;
+use D4Sign\Document\DocumentService;
+
+// Configurando o cliente HTTP manualmente
+$httpClient = new HttpClient();
+$httpClient->baseUrl('https://sandbox.d4sign.com.br/api/v1'); // URL base
+$httpClient->withHeaders([
+    'tokenAPI' => '{tokenAPI}',   // Substitua pela sua chave Token API
+    'cryptKey' => '{cryptKey}'    // Substitua pela sua chave de criptografia
+]);
+
+// Criando a instância do serviço de documentos
+$documentService = new DocumentService($httpClient);
+
+// Listando os documentos
+$documents = $documentService->listDocuments();
+
+// Exibindo o resultado
+echo print_r($documents->getJson(), true);
+```
+
 ### Alternando entre os Ambientes de Produção e Sandbox
 
 A API possui dois ambientes disponíveis:
@@ -82,7 +109,7 @@ A API possui dois ambientes disponíveis:
 
 O ambiente pode ser alternado configurando dinamicamente o URL base durante a inicialização:
 
-``` php
+```php
 $production = true; // Ajuste para 'false' caso queira usar o ambiente Sandbox
 
 $baseUrl = $production 
@@ -102,7 +129,7 @@ As credenciais de autenticação são enviadas no cabeçalho da requisição HTT
 configurar os valores de `tokenAPI` e `cryptKey`.
 Exemplo de cabeçalhos que serão enviados:
 
-``` http
+```http
 tokenAPI: SEU_TOKEN_API
 cryptKey: SUA_CRYPT_KEY
 ```
@@ -114,7 +141,7 @@ cada requisição. No caso de falhas, lançará exceções que podem ser tratada
 
 A SDK utiliza exceções para indicar falhas em operações. Aqui está um exemplo de tratamento de erro:
 
-``` php
+```php
 try {
     $documentos = $d4sign->documents()->listDocuments();
 } catch (\Exception $e) {
@@ -137,7 +164,7 @@ seguem exemplos de uso:
 
 Vamos listar os documentos armazenados na API utilizando o serviço de documentos:
 
-``` php
+```php
 $documentos = $d4sign->documents()->listDocuments();
 
 print_r($documentos->getJson());
@@ -147,7 +174,7 @@ print_r($documentos->getJson());
 
 Suba documentos para o cofre usando os campos obrigatórios:
 
-``` php
+```php
 use D4Sign\Document\UploadDocumentFields;
 
 // Criando os dados para o upload
@@ -164,7 +191,7 @@ echo "Documento enviado com sucesso!" . $documento->getJson();
 
 Adicionar um signatário a um documento existente:
 
-``` php
+```php
 use D4Sign\Signatory\CreateSignatoryInformationFields;
 
 // Informações do novo signatário
@@ -178,7 +205,7 @@ echo "Signatário adicionado ao documento!";
 
 Remover um signatário de um documento:
 
-``` php
+```php
 use D4Sign\Signatory\RemoveSignatoryFields;
 
 $fields = new RemoveSignatoryFields('email@email.com', '{key-signer}');
@@ -190,11 +217,12 @@ echo "Signatário removido.";
 
 ### 6.4 Webhooks
 
-A API D4Sign permite gerenciar webhooks para notificação sobre eventos de documentos. Você pode listar, criar, atualizar e excluir webhooks.
+A API D4Sign permite gerenciar webhooks para notificação sobre eventos de documentos. Você pode listar, criar, atualizar
+e excluir webhooks.
 
 #### Listar Webhooks Existentes
 
-``` php
+```php
 $webhooks = $d4sign->webhooks()->listWebhooks();
 
 foreach ($webhooks as $webhook) {
@@ -204,7 +232,7 @@ foreach ($webhooks as $webhook) {
 
 #### Criar um Novo Webhook
 
-``` php
+```php
 use D4Sign\Webhook\CreateWebhookFields;
 
 $fields = new CreateWebhookFields('https://meuwebhook.com/callback', ['DOCUMENT_SIGNED']);
@@ -215,7 +243,7 @@ echo "Webhook criado com sucesso! UUID: " . $webhook['uuid'];
 
 #### Atualizar um Webhook Existente
 
-``` php
+```php
 use D4Sign\Webhook\UpdateWebhookFields;
 
 $fields = new UpdateWebhookFields('https://meuwebhook.com/novo_callback', ['DOCUMENT_REJECTED']);
@@ -226,13 +254,13 @@ echo "Webhook atualizado com sucesso!";
 
 #### Excluir um Webhook
 
-``` php
+```php
 $d4sign->webhooks()->deleteWebhook('uuid-webhook');
 
 echo "Webhook excluído com sucesso!";
 ```
 
-``` php
+```php
 $webhooks = $d4sign->webhooks()->listWebhooks();
 
 foreach ($webhooks as $webhook) {
@@ -245,7 +273,8 @@ foreach ($webhooks as $webhook) {
 Explore os serviços disponíveis na SDK:
 
 - **Cofres**: `$d4sign->safes()` - Gerencie cofres, incluindo criação e visualização de cofres.
-- **Documentos**: `$d4sign->documents()` - Faça o upload de documentos, adicione arquivos e gerencie o status de documentos.
+- **Documentos**: `$d4sign->documents()` - Faça o upload de documentos, adicione arquivos e gerencie o status de
+  documentos.
 - **Signatários**: `$d4sign->signatories()` - Adicione, remova e gerencie signatários de documentos.
 - **Usuários**: `$d4sign->users()` - Gerencie usuários na sua conta D4Sign.
 - **Tags**: `$d4sign->tags()` - Utilize e gerencie tags para personalizar seus documentos.
