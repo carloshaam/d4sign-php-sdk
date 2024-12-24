@@ -51,7 +51,7 @@ O Composer é o gerenciador de dependências mais utilizado no ecossistema PHP. 
 Composer, utilize o comando:
 
 ```bash
-composer require carloshaam/d4sign-sdk
+composer require carloshaam/d4sign-php-sdk
 ```
 
 Isso irá baixar a SDK e suas dependências automaticamente para o diretório `vendor/`.
