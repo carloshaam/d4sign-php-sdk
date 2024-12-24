@@ -21,9 +21,9 @@ try {
         'document_number' => '00100200309',
     ];
 
-    $user = $d4sign->certificates()->addCertificateToDocument('uuid-document', $fields);
+    $certificate = $d4sign->certificates()->addCertificateToDocument('uuid-document', $fields);
 
-    echo print_r($user->getJson(), true);
+    echo print_r($certificate->getJson(), true);
 } catch (\Exception $e) {
     echo $e->getMessage();
 }

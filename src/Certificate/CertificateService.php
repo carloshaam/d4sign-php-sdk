@@ -51,7 +51,7 @@ class CertificateService implements CertificateServiceInterface
                     'Failed to add certificate to document ID "%s". Data submitted: %s. Error: %s. Check if the document ID and data are valid, and try again.',
                     $documentId,
                     json_encode($fields),
-                    $e->getMessage()
+                    $e->getMessage(),
                 ),
                 $e->getCode(),
                 $e,

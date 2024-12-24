@@ -14,9 +14,9 @@ $d4sign = new D4Sign(
 );
 
 try {
-    $user = $d4sign->certificates()->listCertificates('uuid-document');
+    $certificate = $d4sign->certificates()->listCertificates('uuid-document');
 
-    echo print_r($user->getJson(), true);
+    echo print_r($certificate->getJson(), true);
 } catch (\Exception $e) {
     echo $e->getMessage();
 }

@@ -14,9 +14,9 @@ $d4sign = new D4Sign(
 );
 
 try {
-    $safes = $d4sign->tags()->addUrgentTagToDocument('uuid-document');
+    $tags = $d4sign->tags()->addUrgentTagToDocument('uuid-document');
 
-    echo print_r($safes->getJson(), true);
+    echo print_r($tags->getJson(), true);
 } catch (\Exception $e) {
     echo $e->getMessage();
 }

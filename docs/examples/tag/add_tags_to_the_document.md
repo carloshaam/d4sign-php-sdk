@@ -16,9 +16,9 @@ $d4sign = new D4Sign(
 try {
     $fields = ['tag' => 'hot'];
 
-    $safes = $d4sign->tags()->addTagToDocument('uuid-document', $fields);
+    $tags = $d4sign->tags()->addTagToDocument('uuid-document', $fields);
 
-    echo print_r($safes->getJson(), true);
+    echo print_r($tags->getJson(), true);
 } catch (\Exception $e) {
     echo $e->getMessage();
 }
