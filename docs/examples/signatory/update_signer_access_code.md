@@ -38,12 +38,12 @@ Código para acessar o documento. Deixe em branco para remover o código atual. 
 $fields->setPasswordCode('Código');
 ```
 
-`key-signer`
+`key_signer`
 
 Chave do signatário. (opcional)
 
 ```php
-$fields->setKeySigner('{key-signer}');
+$fields->setKeySigner('{key_signer}');
 ```
 
 Código é encontrado listando os signatários de um documento.

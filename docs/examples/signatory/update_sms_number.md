@@ -18,7 +18,7 @@ try {
     $fields = new UpdateSignatorySmsNumberFields(
         'email@email.com',
         '+553300000000',
-        '{key-signer}'
+        '{key_signer}'
     );
 
     $signatory = $d4sign->signatories()->updateSignatorySMSNumber('uuid-document', $fields);
@@ -31,6 +31,6 @@ try {
 
 ## Opções dos campos
 
-`key-signer`
+`key_signer`
 
 Código é encontrado listando os signatários de um documento.

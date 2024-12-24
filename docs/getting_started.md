@@ -195,7 +195,7 @@ Adicionar um signatário a um documento existente:
 use D4Sign\Signatory\CreateSignatoryInformationFields;
 
 // Informações do novo signatário
-$fields = new CreateSignatoryInformationFields('{key-signer}', 'email@email.com');
+$fields = new CreateSignatoryInformationFields('{key_signer}', 'email@email.com');
 
 // Adicionando o signatário
 $signatario = $d4sign->signatories()->addSignatoryInformation('uuid-document', $fields);
@@ -208,7 +208,7 @@ Remover um signatário de um documento:
 ```php
 use D4Sign\Signatory\RemoveSignatoryFields;
 
-$fields = new RemoveSignatoryFields('email@email.com', '{key-signer}');
+$fields = new RemoveSignatoryFields('email@email.com', '{key_signer}');
 
 $d4sign->signatories()->removeSignatory('uuid-document', $fields);
 

@@ -16,7 +16,7 @@ $d4sign = new D4Sign(
 try {
     $signatory = $d4sign->signatories()->copySignatorySubscriptionLink(
         'uuid-document',
-        '{key-signer}'
+        '{key_signer}'
     );
 
     echo print_r($signatory->getJson(), true);
@@ -27,6 +27,6 @@ try {
 
 ## Opções dos campos
 
-`key-signer`
+`key_signer`
 
 Código é encontrado listando os signatários de um documento.

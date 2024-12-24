@@ -15,7 +15,7 @@ $d4sign = new D4Sign(
 );
 
 try {
-    $fields = new CreateSignatoryInformationFields('{key-signer}','email@email.com');
+    $fields = new CreateSignatoryInformationFields('{key_signer}','email@email.com');
     $fields->setDisplayName('Lorem ipsum');
 
     $signatory = $d4sign->signatories()->addSignatoryInformation('uuid-document', $fields);
@@ -28,6 +28,6 @@ try {
 
 ## Opções dos campos
 
-`key-signer`
+`key_signer`
 
 Código é encontrado listando os signatários de um documento.

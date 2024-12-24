@@ -15,7 +15,7 @@ $d4sign = new D4Sign(
 );
 
 try {
-    $fields = new RemoveSignatoryFields('email@email.com', '{key-signer}');
+    $fields = new RemoveSignatoryFields('email@email.com', '{key_signer}');
 
     $signatory = $d4sign->signatories()->removeSignatory('uuid-document', $fields);
 
@@ -27,6 +27,6 @@ try {
 
 ## Opções dos campos
 
-`key-signer`
+`key_signer`
 
 Código é encontrado listando os signatários de um documento.

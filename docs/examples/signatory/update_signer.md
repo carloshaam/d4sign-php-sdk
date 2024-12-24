@@ -18,7 +18,7 @@ try {
     $fields = new UpdateSignatoryEmailFields(
         'emailantigo@email.com',
         'emailnovo@email.com',
-        '{key-signer}' // Código é encontrado listando os signatários de um documento.
+        '{key_signer}'
     );
 
     $signatory = $d4sign->signatories()->updateSignatoryEmail('uuid-document', $fields);
@@ -31,6 +31,6 @@ try {
 
 ## Opções dos campos
 
-`key-signer`
+`key_signer`
 
 Código é encontrado listando os signatários de um documento.

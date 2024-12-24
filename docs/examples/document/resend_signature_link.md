@@ -16,7 +16,7 @@ $d4sign = new D4Sign(
 try {
     $fields = [
         'email' => 'email@email.com',
-        'key_signer' => '{key-signer}'
+        'key_signer' => '{key_signer}'
     ];
 
     $document = $d4sign->documents()->resendDocumentToSigners('uuid-document', $fields);
@@ -29,6 +29,6 @@ try {
 
 ## Opções dos campos
 
-`key-signer`
+`key_signer`
 
 Código é encontrado listando os signatários de um documento.
