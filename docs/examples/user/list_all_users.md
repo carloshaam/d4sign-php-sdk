@@ -14,9 +14,9 @@ $d4sign = new D4Sign(
 );
 
 try {
-    $template = $d4sign->users()->listUsers();
+    $user = $d4sign->users()->listUsers();
 
-    echo print_r($template->getJson(), true);
+    echo print_r($user->getJson(), true);
 } catch (\Exception $e) {
     echo $e->getMessage();
 }
