@@ -83,7 +83,8 @@ Os exemplos a seguir demonstram como você realizaria tarefas comuns com o SDK d
   - [Remover observador do documento](./examples/watcher/remove_watcher_from_document.md)
   - [Remover TODOS os observadores do documento](./examples/watcher/remove_all_watchers_from_document.md)
 - Webhooks
-  - [Retornos enviados para a sua URL via POST](./examples/webhook/returns_sent_to_your_url_via_post.md)
+  - [Listar Webhook de um documento](./examples/webhook/list_webhook_of_a_document.md)
+  - [Cadastrar Webhook em um documento](./examples/webhook/register_webhook_in_a_document.md)
 
 ## API Reference
 
