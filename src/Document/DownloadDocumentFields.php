@@ -11,6 +11,7 @@ class DownloadDocumentFields implements DownloadDocumentFieldsInterface
     private ?string $type;
     private ?string $language;
     private ?bool $document = false;
+    private ?bool $encoding = false;
 
     public function __construct() {}
 
@@ -35,6 +36,13 @@ class DownloadDocumentFields implements DownloadDocumentFieldsInterface
         return $this;
     }
 
+    public function setEncoding(?bool $encoding): self
+    {
+        $this->encoding = $encoding;
+
+        return $this;
+    }
+
     public function toArray(): array
     {
         $data = [];
@@ -49,6 +57,10 @@ class DownloadDocumentFields implements DownloadDocumentFieldsInterface
 
         if ($this->document !== null) {
             $data['document'] = $this->document;
+        }
+
+        if ($this->encoding !== null) {
+            $data['encoding'] = $this->encoding;
         }
 
         return $data;
