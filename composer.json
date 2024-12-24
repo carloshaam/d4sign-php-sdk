@@ -1,9 +1,9 @@
 {
-    "name": "carloshaam/d4sign-sdk",
+    "name": "carloshaam/d4sign-php-sdk",
     "description": "A PHP library to interact with the D4Sign API",
     "keywords": ["d4sign", "sdk"],
     "type": "library",
-    "homepage": "https://github.com/carloshaam/d4sign-sdk",
+    "homepage": "https://github.com/carloshaam/d4sign-php-sdk",
     "license": "MIT",
     "authors": [
         {
