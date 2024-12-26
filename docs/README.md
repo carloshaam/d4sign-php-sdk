@@ -26,9 +26,9 @@ Os exemplos a seguir demonstram como você realizaria tarefas comuns com o SDK d
   - [Listar todos os documentos de uma fase](./examples/document/list_all_documents_in_a_phase.md)
   - [UPLOAD de um documento principal](./examples/document/upload_a_main_document.md)
   - [UPLOAD de um documento anexo ao principal](./examples/document/upload_a_document_attached_to_main.md)
-  - [UPLOAD de um documento principal (Binário)](./examples/document/upload_a_main_document_binary.md)
-  - [UPLOAD de um documento anexo ao principal (Binário)](./examples/document/upload_a_document_attached_to_main_binary.md)
-  - [UPLOAD de um hash de documento (HASH)](./examples/document/upload_a_document_hash.md)
+  - [UPLOAD de um documento principal (Binário)](./examples/document/upload_a_main_document_binary.md) - Pendente
+  - [UPLOAD de um documento anexo ao principal (Binário)](./examples/document/upload_a_document_attached_to_main_binary.md) - Pendente
+  - [UPLOAD de um hash de documento (HASH)](./examples/document/upload_a_document_hash.md) - Pendente
   - [Destacar cláusulas](./examples/document/highlight_clauses.md)
   - [Enviar documento para assinatura](./examples/document/send_document_for_signature.md)
   - [Cancelar um documento](./examples/document/cancel_a_document.md)
