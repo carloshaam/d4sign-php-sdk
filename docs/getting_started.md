@@ -193,7 +193,6 @@ echo print_r($documento->getJson());
 ### 6.3 Gerenciar Signatários
 
 Adicionar um signatário a um documento existente:
-em desen
 ```php
 use D4Sign\Signatory\CreateSignatoryInformationFields;
 
