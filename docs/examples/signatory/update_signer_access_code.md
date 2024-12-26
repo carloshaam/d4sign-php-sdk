@@ -32,7 +32,7 @@ try {
 
 `password-code`
 
-Código para acessar o documento. Deixe em branco para remover o código atual. (opcional)
+Código para acessar o documento. Deixe em branco para remover o código atual.
 
 ```php
 $fields->setPasswordCode('Código');
@@ -40,7 +40,7 @@ $fields->setPasswordCode('Código');
 
 `key_signer`
 
-Chave do signatário. (opcional)
+Chave do signatário.
 
 ```php
 $fields->setKeySigner('{key_signer}');

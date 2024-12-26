@@ -38,8 +38,8 @@ Os exemplos a seguir demonstram como você realizaria tarefas comuns com o SDK d
   - [Documento a partir do template HTML](./examples/document/document_from_html_template.md)
   - [Documento a partir do template WORD](./examples/document/document_from_word_template.md)
   - [Download em formato PDF/A](./examples/document/download_in_pdf_format_a.md)
-  - [Download de Documentos e Certificados de Assinaturas Desmembrados](./examples/document/download_documents_and_separated_signature_certificates.md) - Pendente
-  - [Posicionamento XY de Rubricas](./examples/document/xy_positioning_of_initials.md) - Pendente
+  - [Download de Documentos e Certificados de Assinaturas Desmembrados](./examples/document/download_documents_and_separated_signature_certificates.md)
+  - [Posicionamento XY de Rubricas](./examples/document/xy_positioning_of_initials.md)
   - [Download Documentos Base 64](./examples/document/download_documents_base_64.md)
   - [UPLOAD de Big File - Documento principal acima de 20MB](./examples/document/upload_big_file.md) - Pendente
   - [Documento a partir do template WORD com mais de 1 preenchedor](./examples/document/document_from_word_template_with_more_than_one_filler.md) - Pendente

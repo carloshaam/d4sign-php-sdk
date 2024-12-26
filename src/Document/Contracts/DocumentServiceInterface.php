@@ -157,4 +157,33 @@ interface DocumentServiceInterface
      * @return HttpResponseInterface Retorna a resposta da API com o link gerado.
      */
     public function generateDocumentDownloadLink(string $documentId, ?DownloadDocumentFieldsInterface $fields): HttpResponseInterface;
+
+    /**
+     * Lista os documentos separados e certificados associados a um documento específico.
+     *
+     * @param string $documentId ID do documento.
+     *
+     * @return HttpResponseInterface Retorna a lista de documentos separados e certificados associados ao ID fornecido.
+     */
+    public function listSplitDocumentsAndCertificates(string $documentId): HttpResponseInterface;
+
+    /**
+     * Faz o download de um arquivo zip com os arquivos preenchido com os campos fornecidos.
+     *
+     * @param string $documentId ID do documento.
+     * @param array $fields Um array associativo contendo os campos e seus respectivos valores para preenchimento no documento.
+     *
+     * @return HttpResponseInterface Retorna o documento preenchido no formato apropriado.
+     */
+    public function downloadDocumentWithFields(string $documentId, array $fields): HttpResponseInterface;
+
+    /**
+     * Define as posições X e Y das rubricas em um documento.
+     *
+     * @param string $safeId ID do cofre.
+     * @param array $fields Array contendo os dados das posições das rubricas.
+     *
+     * @return HttpResponseInterface Retorna a resposta indicando o resultado da operação.
+     */
+    public function setXYPositionOfHeadingsInDocument(string $safeId, array $fields): HttpResponseInterface;
 }

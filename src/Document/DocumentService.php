@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace D4Sign\Document;
 
 use D4Sign\Client\Contracts\HttpClientInterface;
+use D4Sign\Client\Contracts\HttpResponseInterface;
 use D4Sign\Client\HttpResponse;
 use D4Sign\Document\Contracts\{
     CancelDocumentFieldsInterface,
@@ -268,6 +269,68 @@ class DocumentService implements DocumentServiceInterface
         } catch (\Throwable $e) {
             throw new D4SignConnectException(
                 "Error generating download link for document $documentId: " . $e->getMessage(),
+                $e->getCode(),
+                $e,
+            );
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function listSplitDocumentsAndCertificates(string $documentId): HttpResponseInterface
+    {
+        try {
+            return $this->httpClient->get("documents/$documentId/listslaves");
+        } catch (\Throwable $e) {
+            throw new D4SignConnectException(
+                sprintf(
+                    "Failed to retrieve the list of split documents and certificates for document ID '%s'. Error: %s",
+                    $documentId,
+                    $e->getMessage()
+                ),
+                $e->getCode(),
+                $e,
+            );
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function downloadDocumentWithFields(string $documentId, array $fields): HttpResponseInterface
+    {
+        try {
+            return $this->httpClient->post("documents/$documentId/downloadlist", $fields);
+        } catch (\Throwable $e) {
+            throw new D4SignConnectException(
+                sprintf(
+                    "Failed to generate the document with fields for document ID '%s'. Fields: %s. Error: %s",
+                    $documentId,
+                    json_encode($fields),
+                    $e->getMessage()
+                ),
+                $e->getCode(),
+                $e,
+            );
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setXYPositionOfHeadingsInDocument(string $safeId, array $fields): HttpResponseInterface
+    {
+        try {
+            return $this->httpClient->post("documents/$safeId/createrubricintemplateword", $fields);
+        } catch (\Throwable $e) {
+            throw new D4SignConnectException(
+                sprintf(
+                    "Failed to set the X-Y positions of headings in the document for Safe ID '%s'. Fields: %s. Error: %s",
+                    $safeId,
+                    json_encode($fields),
+                    $e->getMessage()
+                ),
                 $e->getCode(),
                 $e,
             );
