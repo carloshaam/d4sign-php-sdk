@@ -193,6 +193,7 @@ echo print_r($documento->getJson());
 ### 6.3 Gerenciar Signatários
 
 Adicionar um signatário a um documento existente:
+
 ```php
 use D4Sign\Signatory\CreateSignatoryInformationFields;
 
@@ -220,8 +221,7 @@ echo "Signatário removido.";
 
 ### 6.4 Webhooks
 
-A API D4Sign permite gerenciar webhooks para notificação sobre eventos de documentos. Você pode listar, criar, atualizar
-e excluir webhooks.
+A API D4Sign permite gerenciar webhooks para notificação sobre eventos de documentos. Você pode listar e criar.
 
 #### Listar Webhooks Existentes
 
