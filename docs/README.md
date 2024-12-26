@@ -42,7 +42,7 @@ Os exemplos a seguir demonstram como você realizaria tarefas comuns com o SDK d
   - [Posicionamento XY de Rubricas](./examples/document/xy_positioning_of_initials.md)
   - [Download Documentos Base 64](./examples/document/download_documents_base_64.md)
   - [UPLOAD de Big File - Documento principal acima de 20MB](./examples/document/upload_big_file.md)
-  - [Documento a partir do template WORD com mais de 1 preenchedor](./examples/document/document_from_word_template_with_more_than_one_filler.md) - Pendente
+  - [Documento a partir do template WORD com mais de 1 preenchedor](./examples/document/document_from_word_template_with_more_than_one_filler.md)
   - [Agendamento de envio de documentos para assinatura](./examples/document/schedule_sending_documents_for_signature.md)
 - Signatários
   - [Listar signatários de um documento](./examples/signatory/list_document_signers.md)
