@@ -1,12 +1,11 @@
 # D4Sign SDK PHP (Em desenvolvimento)
 
 [![Latest Stable Version](https://poser.pugx.org/carloshaam/d4sign-php-sdk/version)](https://packagist.org/packages/carloshaam/d4sign-php-sdk)
+[![Total Downloads](https://poser.pugx.org/carloshaam/d4sign-php-sdk/downloads)](https://packagist.org/packages/carloshaam/d4sign-php-sdk)
+[![PHP Version Require](http://poser.pugx.org/carloshaam/d4sign-php-sdk/require/php)](https://packagist.org/packages/carloshaam/d4sign-php-sdk)
 [![License](https://poser.pugx.org/carloshaam/d4sign-php-sdk/license)](https://packagist.org/packages/carloshaam/d4sign-php-sdk)
 
 Este repositório contém o SDK PHP de código aberto que permite que você acesse a plataforma da D4Sign a partir do seu aplicativo PHP.
-
-> [!WARNING]
-> Projeto em desenvolvimento, alterações estão sendo feitas e mudanças rigorosas podem acontecer a qualquer momento.
 
 ## Instalação
 
