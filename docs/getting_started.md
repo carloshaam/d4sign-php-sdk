@@ -144,8 +144,10 @@ A SDK utiliza exceções para indicar falhas em operações. Aqui está um exemp
 ```php
 try {
     $documentos = $d4sign->documents()->listDocuments();
+
+    echo print_r($documentos->getJson());
 } catch (\Exception $e) {
-    echo "Erro ao listar documentos: " . $e->getMessage();
+    echo $e->getMessage();
 }
 ```
 
@@ -167,7 +169,7 @@ Vamos listar os documentos armazenados na API utilizando o serviço de documento
 ```php
 $documentos = $d4sign->documents()->listDocuments();
 
-print_r($documentos->getJson());
+echo print_r($documentos->getJson());
 ```
 
 ### 6.2 Enviar Documento para um Cofre
@@ -184,13 +186,14 @@ $fields->setUuidFolder('uuid-folder'); // Para associar a um diretório
 // Enviando o documento
 $documento = $d4sign->documents()->uploadDocumentToSafe('uuid-safe', $fields);
 
-echo "Documento enviado com sucesso!" . $documento->getJson();
+echo "Documento enviado com sucesso!" . PHP_EOL;
+echo print_r($documento->getJson());
 ```
 
 ### 6.3 Gerenciar Signatários
 
 Adicionar um signatário a um documento existente:
-
+em desen
 ```php
 use D4Sign\Signatory\CreateSignatoryInformationFields;
 
@@ -200,7 +203,8 @@ $fields = new CreateSignatoryInformationFields('{key_signer}', 'email@email.com'
 // Adicionando o signatário
 $signatario = $d4sign->signatories()->addSignatoryInformation('uuid-document', $fields);
 
-echo "Signatário adicionado ao documento!";
+echo "Signatário adicionado ao documento!" . PHP_EOL;
+echo print_r($signatario->getJson());
 ```
 
 Remover um signatário de um documento:

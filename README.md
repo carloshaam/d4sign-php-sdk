@@ -44,7 +44,7 @@ $filePath = '/path/to/filename.pdf';
 
 try {
     $fields = new UploadDocumentFields($filePath);
-    $fields->setUuidFolder('uuid-folder'); // optional
+    $fields->setUuidFolder('uuid-folder'); // opcional
 
     $document = $d4sign->documents()->uploadDocumentToSafe('uuid-safe', $fields);
 
@@ -58,7 +58,7 @@ Documentação completa, instruções de instalação e exemplos estão disponí
 
 ## Roadmap
 
-- Implementar todos os métodos públicos da API da D4Sign (Em desenvolvimento)
+- Implementar todos os métodos públicos da API da D4Sign ([Em desenvolvimento](./docs))
 - Implementar testes unitarios (Pendente)
 
 ## Tests (Pendente)
