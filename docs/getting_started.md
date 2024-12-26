@@ -36,7 +36,7 @@ eficiente de arquivos na sua aplicação PHP, tornando o processo muito mais ág
 
 Os seguintes requisitos são necessários para o funcionamento da SDK:
 
-- **PHP 7.4 ou superior**: Garantimos compatibilidade com as versões mais recentes do PHP para aproveitar os recursos
+- **PHP 7.4 ou superior**: garantimos compatibilidade com as versões mais recentes do PHP para aproveitar os recursos
   modernos da linguagem.
 - **Extensões PHP**:
     - `curl` - Para realizar as requisições HTTP.
@@ -227,7 +227,7 @@ e excluir webhooks.
 #### Listar Webhooks Existentes
 
 ```php
-$webhooks = $d4sign->webhooks()->listWebhooks();
+$webhooks = $d4sign->webhooks()->listWebhookToDocument();
 
 foreach ($webhooks as $webhook) {
     echo $webhook['uuid'] . " - " . $webhook['webhook_url'] . PHP_EOL;
@@ -237,39 +237,11 @@ foreach ($webhooks as $webhook) {
 #### Criar um Novo Webhook
 
 ```php
-use D4Sign\Webhook\CreateWebhookFields;
+$fields = ['url' => 'https://meuwebhook.com/callback']);
 
-$fields = new CreateWebhookFields('https://meuwebhook.com/callback', ['DOCUMENT_SIGNED']);
-$webhook = $d4sign->webhooks()->createWebhook('uuid-document', $fields);
+$webhook = $d4sign->webhooks()->createWebhookToDocument('uuid-document', $fields);
 
 echo "Webhook criado com sucesso! UUID: " . $webhook['uuid'];
-```
-
-#### Atualizar um Webhook Existente
-
-```php
-use D4Sign\Webhook\UpdateWebhookFields;
-
-$fields = new UpdateWebhookFields('https://meuwebhook.com/novo_callback', ['DOCUMENT_REJECTED']);
-$d4sign->webhooks()->updateWebhook('uuid-webhook', $fields);
-
-echo "Webhook atualizado com sucesso!";
-```
-
-#### Excluir um Webhook
-
-```php
-$d4sign->webhooks()->deleteWebhook('uuid-webhook');
-
-echo "Webhook excluído com sucesso!";
-```
-
-```php
-$webhooks = $d4sign->webhooks()->listWebhooks();
-
-foreach ($webhooks as $webhook) {
-    echo $webhook['uuid'] . " - " . $webhook['webhook_url'] . PHP_EOL;
-}
 ```
 
 ## 7. Próximos Passos
