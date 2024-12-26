@@ -260,8 +260,52 @@ class DocumentService implements DocumentServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function generateDocumentDownloadLink(string $documentId, DownloadDocumentFieldsInterface $fields = null): HttpResponse
+    public function downloadDocumentWithFields(string $documentId, array $fields): HttpResponseInterface
     {
+        try {
+            return $this->httpClient->post("documents/$documentId/downloadlist", $fields);
+        } catch (\Throwable $e) {
+            throw new D4SignConnectException(
+                sprintf(
+                    "Failed to generate the document with fields for document ID '%s'. Fields: %s. Error: %s",
+                    $documentId,
+                    json_encode($fields),
+                    $e->getMessage(),
+                ),
+                $e->getCode(),
+                $e,
+            );
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setXYPositionOfHeadingsInDocument(string $safeId, array $fields): HttpResponseInterface
+    {
+        try {
+            return $this->httpClient->post("documents/$safeId/createrubricintemplateword", $fields);
+        } catch (\Throwable $e) {
+            throw new D4SignConnectException(
+                sprintf(
+                    "Failed to set the X-Y positions of headings in the document for Safe ID '%s'. Fields: %s. Error: %s",
+                    $safeId,
+                    json_encode($fields),
+                    $e->getMessage(),
+                ),
+                $e->getCode(),
+                $e,
+            );
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function generateDocumentDownloadLink(
+        string $documentId,
+        DownloadDocumentFieldsInterface $fields = null
+    ): HttpResponse {
         try {
             $fields = $fields ? $fields->toArray() : [];
 
@@ -287,7 +331,7 @@ class DocumentService implements DocumentServiceInterface
                 sprintf(
                     "Failed to retrieve the list of split documents and certificates for document ID '%s'. Error: %s",
                     $documentId,
-                    $e->getMessage()
+                    $e->getMessage(),
                 ),
                 $e->getCode(),
                 $e,
@@ -298,38 +342,38 @@ class DocumentService implements DocumentServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function downloadDocumentWithFields(string $documentId, array $fields): HttpResponseInterface
+    public function uploadLargeDocument(string $safeId, UploadDocumentFieldsInterface $fields): HttpResponseInterface
     {
         try {
-            return $this->httpClient->post("documents/$documentId/downloadlist", $fields);
+            return $this->httpClient->asMultipart()->post("documents/$safeId/uploadbigfile", $fields->toArray());
         } catch (\Throwable $e) {
             throw new D4SignConnectException(
                 sprintf(
-                    "Failed to generate the document with fields for document ID '%s'. Fields: %s. Error: %s",
-                    $documentId,
-                    json_encode($fields),
-                    $e->getMessage()
-                ),
-                $e->getCode(),
-                $e,
-            );
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setXYPositionOfHeadingsInDocument(string $safeId, array $fields): HttpResponseInterface
-    {
-        try {
-            return $this->httpClient->post("documents/$safeId/createrubricintemplateword", $fields);
-        } catch (\Throwable $e) {
-            throw new D4SignConnectException(
-                sprintf(
-                    "Failed to set the X-Y positions of headings in the document for Safe ID '%s'. Fields: %s. Error: %s",
+                    "Failed to upload a large document to the safe identified by '%s'. An unexpected error occurred during the process. Fields sent: %s. Error details: %s",
                     $safeId,
-                    json_encode($fields),
-                    $e->getMessage()
+                    json_encode($fields->toArray()),
+                    $e->getMessage(),
+                ),
+                $e->getCode(),
+                $e,
+            );
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function scheduleDocumentForSignature(string $documentId, array $fields): HttpResponseInterface
+    {
+        try {
+            return $this->httpClient->post("documents/$documentId/scheduling", $fields);
+        } catch (\Throwable $e) {
+            throw new D4SignConnectException(
+                sprintf(
+                    "Failed to schedule the document for signature. Document ID: '%s'. The provided fields could not be processed: %s. Error details: %s.",
+                    $documentId,
+                    json_encode($fields, JSON_PRETTY_PRINT),
+                    $e->getMessage(),
                 ),
                 $e->getCode(),
                 $e,

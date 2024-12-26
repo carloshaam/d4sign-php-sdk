@@ -66,7 +66,10 @@ interface DocumentServiceInterface
      *
      * @return HttpResponseInterface Retorna a resposta da API após o upload.
      */
-    public function uploadRelatedDocument(string $documentId, UploadDocumentFieldsInterface $fields): HttpResponseInterface;
+    public function uploadRelatedDocument(
+        string $documentId,
+        UploadDocumentFieldsInterface $fields
+    ): HttpResponseInterface;
 
     /**
      * Adiciona um destaque em um documento.
@@ -109,7 +112,10 @@ interface DocumentServiceInterface
      *
      * @return HttpResponseInterface Retorna uma URL final para download do documento.
      */
-    public function downloadDocument(string $documentId, ?DownloadDocumentFieldsInterface $fields): HttpResponseInterface;
+    public function downloadDocument(
+        string $documentId,
+        ?DownloadDocumentFieldsInterface $fields
+    ): HttpResponseInterface;
 
     /**
      * Reenvia o documento para os signatários.
@@ -149,25 +155,6 @@ interface DocumentServiceInterface
     public function createDocumentFromWordTemplate(string $documentId, array $fields): HttpResponseInterface;
 
     /**
-     * Gera um link para download de um documento.
-     *
-     * @param string $documentId ID do documento.
-     * @param DownloadDocumentFieldsInterface|null $fields Configurações do link de download (como validade, senha, etc.).
-     *
-     * @return HttpResponseInterface Retorna a resposta da API com o link gerado.
-     */
-    public function generateDocumentDownloadLink(string $documentId, ?DownloadDocumentFieldsInterface $fields): HttpResponseInterface;
-
-    /**
-     * Lista os documentos separados e certificados associados a um documento específico.
-     *
-     * @param string $documentId ID do documento.
-     *
-     * @return HttpResponseInterface Retorna a lista de documentos separados e certificados associados ao ID fornecido.
-     */
-    public function listSplitDocumentsAndCertificates(string $documentId): HttpResponseInterface;
-
-    /**
      * Faz o download de um arquivo zip com os arquivos preenchido com os campos fornecidos.
      *
      * @param string $documentId ID do documento.
@@ -186,4 +173,46 @@ interface DocumentServiceInterface
      * @return HttpResponseInterface Retorna a resposta indicando o resultado da operação.
      */
     public function setXYPositionOfHeadingsInDocument(string $safeId, array $fields): HttpResponseInterface;
+
+    /**
+     * Gera um link para download de um documento.
+     *
+     * @param string $documentId ID do documento.
+     * @param DownloadDocumentFieldsInterface|null $fields Configurações do link de download (como validade, senha, etc.).
+     *
+     * @return HttpResponseInterface Retorna a resposta da API com o link gerado.
+     */
+    public function generateDocumentDownloadLink(
+        string $documentId,
+        ?DownloadDocumentFieldsInterface $fields
+    ): HttpResponseInterface;
+
+    /**
+     * Lista os documentos separados e certificados associados a um documento específico.
+     *
+     * @param string $documentId ID do documento.
+     *
+     * @return HttpResponseInterface Retorna a lista de documentos separados e certificados associados ao ID fornecido.
+     */
+    public function listSplitDocumentsAndCertificates(string $documentId): HttpResponseInterface;
+
+    /**
+     * Faz o upload de um documento grande associado a um identificador seguro.
+     *
+     * @param string $safeId ID do cofre.
+     * @param UploadDocumentFieldsInterface $fields Os campos relacionados ao upload do documento.
+     *
+     * @return HttpResponseInterface Retorna a resposta HTTP após o processo de upload.
+     */
+    public function uploadLargeDocument(string $safeId, UploadDocumentFieldsInterface $fields): HttpResponseInterface;
+
+    /**
+     * Agenda um documento para assinatura com os campos especificados.
+     *
+     * @param string $documentId ID do documento.
+     * @param array $fields Os campos a serem preenchidos ou revisados no documento.
+     *
+     * @return HttpResponseInterface Retorna a resposta da operação de agendamento.
+     */
+    public function scheduleDocumentForSignature(string $documentId, array $fields): HttpResponseInterface;
 }

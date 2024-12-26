@@ -20,7 +20,7 @@ try {
     $fields = new UploadDocumentFields($filePath);
     $fields->setUuidFolder('uuid-folder');
 
-    $document = $d4sign->documents()->uploadDocumentToSafe('uuid-document', $fields);
+    $document = $d4sign->documents()->uploadDocumentToSafe('uuid-safe', $fields);
 
     echo print_r($document->getJson(), true);
 } catch (\Exception $e) {
