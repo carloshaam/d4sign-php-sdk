@@ -51,7 +51,7 @@ public function __construct(
 - **`tokenAPI`** _(string)_: O token da API fornecido pela D4Sign.
 - **`cryptKey`** _(string)_: A chave criptográfica para comunicação segura.
 - **`baseUrl`** _(string, opcional)_: Define a URL base para a API. O valor padrão é
-  `https://sandbox.d4sign.com.br/api/v1`.
+  `https://secure.d4sign.com.br/api/v1`.
 
 ### Exemplo
 
