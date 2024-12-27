@@ -64,9 +64,11 @@ Documentação completa, instruções de instalação e exemplos estão disponí
 
 ```shell
 ./vendor/bin/phpunit
+```
 
-# ou
+ou
 
+```shell
 composer test
 ```
 
