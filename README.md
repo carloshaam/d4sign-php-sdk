@@ -60,7 +60,7 @@ Documentação completa, instruções de instalação e exemplos estão disponí
 - Implementar todos os métodos públicos da API da D4Sign ([Veja quais métodos estão pendentes](./docs))
 - Implementar testes unitarios (Pendente)
 
-## Tests (Pendente)
+## Tests
 
 ```shell
 ./vendor/bin/phpunit
