@@ -7,6 +7,7 @@ namespace D4Sign\Tests\Unit;
 use D4Sign\Certificate\Contracts\CertificateServiceInterface;
 use D4Sign\D4Sign;
 use D4Sign\Document\Contracts\DocumentServiceInterface;
+use D4Sign\Exceptions\D4SignInvalidArgumentException;
 use D4Sign\Safe\Contracts\SafeServiceInterface;
 use D4Sign\Signatory\Contracts\SignatoryServiceInterface;
 use D4Sign\Tag\Contracts\TagServiceInterface;
@@ -95,5 +96,77 @@ class D4SignTest extends TestCase
 
         $this->assertInstanceOf(WebhookServiceInterface::class, $webhookService1);
         $this->assertSame($webhookService1, $webhookService2);
+    }
+
+    public function testCustomBaseUrlIsUsed()
+    {
+        $customBaseUrl = 'https://api.custom-url.com';
+        $sdk = new D4Sign('tokenAPI', 'cryptKey', $customBaseUrl);
+
+        $reflection = new \ReflectionClass($sdk);
+        $property = $reflection->getProperty('client');
+        $property->setAccessible(true);
+        $client = $property->getValue($sdk);
+
+        $httpClient = $client->getHttpClient();
+
+        $httpClientReflection = new \ReflectionClass($httpClient);
+        $defaultOptionsProperty = $httpClientReflection->getProperty('defaultOptions');
+        $defaultOptionsProperty->setAccessible(true);
+        $defaultOptions = $defaultOptionsProperty->getValue($httpClient);
+
+        $this->assertSame($customBaseUrl . '/', $defaultOptions['base_uri']);
+    }
+
+    public function testServiceCache()
+    {
+        $sdk = new D4Sign('tokenAPI', 'cryptKey');
+        $sdk->safes();
+
+        $reflection = new \ReflectionClass($sdk);
+        $property = $reflection->getProperty('services');
+        $property->setAccessible(true);
+
+        $services = $property->getValue($sdk);
+
+        $this->assertArrayHasKey('safes', $services);
+        $this->assertInstanceOf(SafeServiceInterface::class, $services['safes']);
+    }
+
+    public function testD4SignClientConfiguration()
+    {
+        $tokenAPI = 'myToken';
+        $cryptKey = 'myCryptKey';
+
+        $sdk = new D4Sign($tokenAPI, $cryptKey);
+
+        $reflection = new \ReflectionClass($sdk);
+        $property = $reflection->getProperty('client');
+        $property->setAccessible(true);
+        $client = $property->getValue($sdk);
+
+        $httpClient = $client->getHttpClient();
+
+        $httpClientReflection = new \ReflectionClass($httpClient);
+        $defaultOptionsProperty = $httpClientReflection->getProperty('defaultOptions');
+        $defaultOptionsProperty->setAccessible(true);
+        $defaultOptions = $defaultOptionsProperty->getValue($httpClient);
+
+        $this->assertSame($tokenAPI, $defaultOptions['headers']['tokenAPI']);
+        $this->assertSame($cryptKey, $defaultOptions['headers']['cryptKey']);
+    }
+
+    public function testGetServiceThrowsExceptionForNonExistentClass()
+    {
+        $sdk = new D4Sign('tokenAPI', 'cryptKey');
+
+        $this->expectException(D4SignInvalidArgumentException::class);
+        $this->expectExceptionMessage('Class NonExistentClass does not exist.');
+
+        $reflection = new \ReflectionClass($sdk);
+        $method = $reflection->getMethod('getService');
+        $method->setAccessible(true);
+
+        $method->invokeArgs($sdk, ['nonExistentService', 'NonExistentClass']);
     }
 }
