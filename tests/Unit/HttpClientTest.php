@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace D4Sign\Tests\Unit;
 
 use D4Sign\Client\HttpClient;
-use D4Sign\Exceptions\D4SginUnauthorizedException;
+use D4Sign\Exceptions\D4SignUnauthorizedException;
 use D4Sign\Exceptions\D4SignHttpClientException;
 use D4Sign\Exceptions\D4SignRuntimeException;
 use GuzzleHttp\Client as GuzzleClient;
@@ -106,7 +106,7 @@ class HttpClientTest extends TestCase
 
     public function testUnauthorizedException()
     {
-        $this->expectException(D4SginUnauthorizedException::class);
+        $this->expectException(D4SignUnauthorizedException::class);
         $this->expectExceptionMessage('Invalid or expired API key.');
 
         $mock = new MockHandler([

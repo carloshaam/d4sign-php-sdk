@@ -23,7 +23,7 @@ Abaixo está uma tabela resumindo as classes/interfaces e suas descrições, bas
 | **`HighlightFields`**                 | Implementação da interface `HighlightFieldsInterface` com configurações de destaque.                        |
 | **`UploadDocumentFields`**            | Implementação para criação de solicitações de upload, aderindo à interface `UploadDocumentFieldsInterface`. |
 | **`SendToSignersFields`**             | Implementação para configurar o payload para envio de documentos aos signatários.                           |
-| **`D4SginUnauthorizedException`**     | Exceção personalizada para tratar erros de autorização na API D4Sign.                                       |
+| **`D4SignUnauthorizedException`**     | Exceção personalizada para tratar erros de autorização na API D4Sign.                                       |
 | **`D4SignConnectException`**          | Exceção personalizada para tratar problemas de conexão com a API D4Sign.                                    |
 | **`D4SignHttpClientException`**       | Exceção personalizada para tratar problemas relacionados ao cliente HTTP.                                   |
 | **`D4SignInvalidArgumentException`**  | Exceção personalizada para validar argumentos passados aos métodos.                                         |

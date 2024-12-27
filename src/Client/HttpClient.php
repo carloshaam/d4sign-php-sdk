@@ -6,7 +6,7 @@ namespace D4Sign\Client;
 
 use D4Sign\Client\Contracts\HttpClientInterface;
 use D4Sign\Client\Contracts\HttpResponseInterface;
-use D4Sign\Exceptions\D4SginUnauthorizedException;
+use D4Sign\Exceptions\D4SignUnauthorizedException;
 use D4Sign\Exceptions\D4SignHttpClientException;
 use D4Sign\Exceptions\D4SignRuntimeException;
 use D4Sign\Utils\HttpCode;
@@ -262,7 +262,7 @@ class HttpClient implements HttpClientInterface
             );
 
             if ($response->getStatusCode() === HttpCode::UNAUTHORIZED) {
-                throw new D4SginUnauthorizedException('Invalid or expired API key.');
+                throw new D4SignUnauthorizedException('Invalid or expired API key.');
             }
 
             return new HttpResponse(

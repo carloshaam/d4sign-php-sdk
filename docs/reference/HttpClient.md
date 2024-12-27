@@ -438,7 +438,7 @@ public function delete(string $uri, array $params = [], array $headers = []): Ht
 
 A classe lança as seguintes exceções personalizadas:
 
-- **`D4SginUnauthorizedException`**
+- **`D4SignUnauthorizedException`**
     - Quando a chave API está inválida ou expirada.
     - Código HTTP retornado: `401 Unauthorized`.
     - Solução: Revise seu `tokenAPI` ou envie uma nova requisição para renovar o token.
