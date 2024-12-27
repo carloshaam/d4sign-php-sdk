@@ -11,6 +11,8 @@ interface TagServiceInterface
     /**
      * Lista as tags do documento.
      *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-3#listar-as-tags-do-documento Documentação oficial
+     *
      * @param string $documentId ID do documento.
      * @param int $page Número da página para paginação (padrão: 1).
      *
@@ -20,6 +22,8 @@ interface TagServiceInterface
 
     /**
      * Adiciona uma tag ao documento.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-3#adicionar-tags-no-documento Documentação oficial
      *
      * @param string $documentId ID do documento.
      * @param array $fields Campos da tag a serem adicionados ao documento.
@@ -31,6 +35,8 @@ interface TagServiceInterface
     /**
      * Remove uma tag de um documento especificado.
      *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-3#remover-tags-do-documento Documentação oficial
+     *
      * @param string $documentId O identificador exclusivo do documento do qual a tag será removida.
      * @param array $fields Os detalhes da tag a ser removida.
      *
@@ -41,6 +47,8 @@ interface TagServiceInterface
     /**
      * Remove todas as tags associadas a um documento.
      *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-3#remover-todas-as-tags-do-documento Documentação oficial
+     *
      * @param string $documentId O identificador exclusivo do documento.
      *
      * @return HttpResponseInterface A resposta da API indicando o status da operação.
@@ -50,6 +58,8 @@ interface TagServiceInterface
     /**
      * Adiciona uma tag "Urgent" ao documento.
      *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-3#adicionar-tag-urgente-ao-documento Documentação oficial
+     *
      * @param string $documentId O identificador exclusivo do documento.
      *
      * @return HttpResponseInterface A resposta da API indicando o status da operação.
@@ -58,6 +68,8 @@ interface TagServiceInterface
 
     /**
      * Remove a tag "Urgent" de um documento.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-3#remover-tag-urgente-do-documento Documentação oficial
      *
      * @param string $documentId O identificador exclusivo do documento.
      *

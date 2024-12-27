@@ -6,13 +6,12 @@ namespace D4Sign\Certificate\Contracts;
 
 use D4Sign\Client\Contracts\HttpResponseInterface;
 
-/**
- * Interface para gerenciamento de certificados associados a documentos.
- */
 interface CertificateServiceInterface
 {
     /**
      * Recupera uma lista de certificados associados ao documento especificado.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-4#listar-certificado-definido Documentação oficial
      *
      * @param string $documentId O ID do documento para o qual recuperar certificados.
      *
@@ -22,6 +21,8 @@ interface CertificateServiceInterface
 
     /**
      * Adiciona um certificado ao documento especificado usando os campos fornecidos.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-4#definir-certificado Documentação oficial
      *
      * @param string $documentId O identificador exclusivo do documento ao qual o certificado será adicionado.
      * @param array $fields Um array associativo contendo os campos necessários para adicionar o certificado.

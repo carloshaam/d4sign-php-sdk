@@ -6,13 +6,12 @@ namespace D4Sign\Watcher\Contracts;
 
 use D4Sign\Client\Contracts\HttpResponseInterface;
 
-/**
- * Interface responsável por gerenciar os "watchers" de um documento.
- */
 interface WatcherServiceInterface
 {
     /**
      * Lista os "watchers" associados a um determinado documento.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-5#listar-observadores-do-documento Documentação oficial
      *
      * @param string $documentId O ID do documento a ser consultado.
      *
@@ -22,6 +21,8 @@ interface WatcherServiceInterface
 
     /**
      * Adiciona "watcher" a um determinado documento.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-5#adicionar-observador-no-documento Documentação oficial
      *
      * @param string $documentId O ID do documento ao qual os watchers serão adicionados.
      * @param array $fields Os dados dos watchers a serem adicionados.
@@ -33,6 +34,8 @@ interface WatcherServiceInterface
     /**
      * Remove "watcher" específicos de um determinado documento.
      *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-5#remover-observador-do-documento Documentação oficial
+     *
      * @param string $documentId O ID do documento do qual os watchers serão removidos.
      * @param array $fields Os dados dos watchers a serem removidos.
      *
@@ -42,6 +45,8 @@ interface WatcherServiceInterface
 
     /**
      * Remove todos os "watchers" de um determinado documento.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-5#remover-todos-os-observadores-do-documento Documentação oficial
      *
      * @param string $documentId O ID do documento do qual todos os watchers serão removidos.
      *

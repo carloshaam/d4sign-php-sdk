@@ -6,13 +6,12 @@ namespace D4Sign\Document\Contracts;
 
 use D4Sign\Client\Contracts\HttpResponseInterface;
 
-/**
- * Interface para gerenciamento de documentos no serviço D4Sign.
- */
 interface DocumentServiceInterface
 {
     /**
      * Lista todos os documentos disponíveis.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#listar-todos-os-documentos Documentação oficial
      *
      * @param int $page Número da página para paginação (padrão: 1).
      *
@@ -23,6 +22,8 @@ interface DocumentServiceInterface
     /**
      * Obtém os detalhes de um documento específico.
      *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#listar-um-documento-espec%C3%ADfico Documentação oficial
+     *
      * @param string $documentId ID do documento.
      *
      * @return HttpResponseInterface Retorna a resposta da API com os detalhes do documento.
@@ -32,6 +33,8 @@ interface DocumentServiceInterface
     /**
      * Obtém as dimensões de um documento específico.
      *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#get-documentsuuid-documentdimensions Documentação oficial
+     *
      * @param string $documentId ID do documento.
      *
      * @return HttpResponseInterface Retorna as dimensões do documento em formato JSON.
@@ -40,6 +43,8 @@ interface DocumentServiceInterface
 
     /**
      * Lista documentos com base na fase especificada.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#listar-todos-os-documentos-de-uma-fase Documentação oficial
      *
      * @param int $statusId ID da fase.
      * @param int $page Número da página para paginação (padrão: 1).
@@ -51,6 +56,8 @@ interface DocumentServiceInterface
     /**
      * Faz o upload de um novo documento para um cofre específico.
      *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#upload-de-um-documento-principal Documentação oficial
+     *
      * @param string $safeId ID do cofre onde o documento será enviado.
      * @param UploadDocumentFieldsInterface $fields Objeto contendo os dados necessários para o upload.
      *
@@ -61,7 +68,9 @@ interface DocumentServiceInterface
     /**
      * Faz o upload de um documento relacionado a um documento existente.
      *
-     * @param string $documentId ID do documento principal on o documento será enviado.
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#upload-de-um-documento-anexo-ao-principal Documentação oficial
+     *
+     * @param string $documentId ID do documento principal onde o documento será enviado.
      * @param UploadDocumentFieldsInterface $fields Objeto contendo os dados necessários para o upload.
      *
      * @return HttpResponseInterface Retorna a resposta da API após o upload.
@@ -74,6 +83,8 @@ interface DocumentServiceInterface
     /**
      * Adiciona um destaque em um documento.
      *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#destacar-cl%C3%A1usulas Documentação oficial
+     *
      * @param string $documentId ID do documento ao qual será adicionado o destaque.
      * @param HighlightFieldsInterface $fields Objeto contendo os dados necessários para o destaque.
      *
@@ -83,6 +94,8 @@ interface DocumentServiceInterface
 
     /**
      * Envia um documento para os signatários.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#enviar-documento-para-assinatura Documentação oficial
      *
      * @param string $documentId ID do documento a ser enviado.
      * @param SendToSignersFieldsInterface $fields Objeto contendo os dados necessários para envio aos signatários.
@@ -97,6 +110,8 @@ interface DocumentServiceInterface
     /**
      * Cancela um documento em processo de assinatura.
      *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#cancelar-um-documento Documentação oficial
+     *
      * @param string $documentId ID do documento a ser cancelado.
      * @param CancelDocumentFieldsInterface $fields Objeto contendo os dados de cancelamento.
      *
@@ -106,6 +121,9 @@ interface DocumentServiceInterface
 
     /**
      * Faz o download de um documento.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#download-de-um-documento Documentação oficial
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#download-em-formato-pdfa Documentação oficial
      *
      * @param string $documentId ID do documento.
      * @param DownloadDocumentFieldsInterface|null $fields Configurações do download (como formato ou opções adicionais).
@@ -120,6 +138,8 @@ interface DocumentServiceInterface
     /**
      * Reenvia o documento para os signatários.
      *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#reenviar-link-de-assinatura Documentação oficial
+     *
      * @param string $documentId ID do documento.
      * @param array $fields Dados do reenvio (e-mails, mensagens, etc.).
      *
@@ -130,12 +150,16 @@ interface DocumentServiceInterface
     /**
      * Lista os modelos de documentos disponíveis.
      *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#listar-templates Documentação oficial
+     *
      * @return HttpResponseInterface Retorna a lista de modelos cadastrados.
      */
     public function listTemplates(): HttpResponseInterface;
 
     /**
      * Cria um documento a partir de um modelo HTML.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#documento-a-partir-do-template-html Documentação oficial
      *
      * @param string $documentId ID do modelo.
      * @param array $fields Dados necessários para preencher o modelo.
@@ -147,6 +171,8 @@ interface DocumentServiceInterface
     /**
      * Cria um documento a partir de um modelo Word.
      *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#documento-a-partir-do-template-word Documentação oficial
+     *
      * @param string $documentId ID do modelo.
      * @param array $fields Dados necessários para preencher o modelo.
      *
@@ -156,6 +182,8 @@ interface DocumentServiceInterface
 
     /**
      * Faz o download de um arquivo zip com os arquivos preenchido com os campos fornecidos.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#download-de-documentos-e-certificados-de-assinaturas-desmembrados Documentação oficial
      *
      * @param string $documentId ID do documento.
      * @param array $fields Um array associativo contendo os campos e seus respectivos valores para preenchimento no documento.
@@ -167,6 +195,8 @@ interface DocumentServiceInterface
     /**
      * Define as posições X e Y das rubricas em um documento.
      *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#posicionamento-xy-de-rubricas Documentação oficial
+     *
      * @param string $safeId ID do cofre.
      * @param array $fields Array contendo os dados das posições das rubricas.
      *
@@ -176,6 +206,10 @@ interface DocumentServiceInterface
 
     /**
      * Gera um link para download de um documento.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#download-de-um-documento Documentação oficial
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#download-em-formato-pdfa Documentação oficial
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#download-documentos-base-64 Documentação oficial
      *
      * @param string $documentId ID do documento.
      * @param DownloadDocumentFieldsInterface|null $fields Configurações do link de download (como validade, senha, etc.).
@@ -190,6 +224,8 @@ interface DocumentServiceInterface
     /**
      * Lista os documentos separados e certificados associados a um documento específico.
      *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#download-de-documentos-e-certificados-de-assinaturas-desmembrados Documentação oficial
+     *
      * @param string $documentId ID do documento.
      *
      * @return HttpResponseInterface Retorna a lista de documentos separados e certificados associados ao ID fornecido.
@@ -198,6 +234,8 @@ interface DocumentServiceInterface
 
     /**
      * Faz o upload de um documento grande associado a um identificador seguro.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#upload-de-big-file---documento-principal-acima-de-20mb Documentação oficial
      *
      * @param string $safeId ID do cofre.
      * @param UploadDocumentFieldsInterface $fields Os campos relacionados ao upload do documento.
@@ -208,6 +246,8 @@ interface DocumentServiceInterface
 
     /**
      * Agenda um documento para assinatura com os campos especificados.
+     *
+     * @link https://docapi.d4sign.com.br/docs/endpoints-2#agendamento-de-envio-de-documentos-para-assinatura Documentação oficial
      *
      * @param string $documentId ID do documento.
      * @param array $fields Os campos a serem preenchidos ou revisados no documento.
