@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace D4Sign\Tests;
+namespace D4Sign\Tests\Unit;
 
 use D4Sign\Client\Contracts\HttpClientInterface;
 use D4Sign\Client\HttpResponse;
@@ -790,6 +790,118 @@ class DocumentServiceTest extends TestCase
 
         $this->assertEquals(201, $response->status());
         $this->assertEquals('{"data": "large_upload_success"}', $response->getBody());
+    }
+
+    public function testUploadLargeDocumentConcurrency(): void
+    {
+        $httpClientMock = $this->createMock(HttpClientInterface::class);
+
+        $httpClientMock
+            ->expects($this->exactly(5))
+            ->method('asMultipart')
+            ->willReturnSelf();
+
+        $httpClientMock
+            ->expects($this->exactly(5))
+            ->method('post')
+            ->withConsecutive(
+                ['documents/safe123/uploadbigfile', ['field' => 'file1_content']],
+                ['documents/safe123/uploadbigfile', ['field' => 'file2_content']],
+                ['documents/safe123/uploadbigfile', ['field' => 'file3_content']],
+                ['documents/safe123/uploadbigfile', ['field' => 'file4_content']],
+                ['documents/safe123/uploadbigfile', ['field' => 'file5_content']],
+            )
+            ->willReturnOnConsecutiveCalls(
+                new HttpResponse(201, '{"response": "uploaded_file1"}', []),
+                new HttpResponse(201, '{"response": "uploaded_file2"}', []),
+                new HttpResponse(201, '{"response": "uploaded_file3"}', []),
+                new HttpResponse(201, '{"response": "uploaded_file4"}', []),
+                new HttpResponse(201, '{"response": "uploaded_file5"}', []),
+            );
+
+        $documentService = new DocumentService($httpClientMock);
+
+        $mockFields = [];
+        for ($i = 1; $i <= 5; $i++) {
+            $mockField = $this->createMock(UploadDocumentFieldsInterface::class);
+            $mockField
+                ->expects($this->once())
+                ->method('toArray')
+                ->willReturn(['field' => "file{$i}_content"]);
+
+            $mockFields[] = $mockField;
+        }
+
+        $responses = [];
+        foreach ($mockFields as $field) {
+            $responses[] = $documentService->uploadLargeDocument('safe123', $field);
+        }
+
+        $this->assertEquals(201, $responses[0]->status());
+        $this->assertEquals('{"response": "uploaded_file1"}', $responses[0]->getBody());
+        $this->assertEquals(201, $responses[1]->status());
+        $this->assertEquals('{"response": "uploaded_file2"}', $responses[1]->getBody());
+        $this->assertEquals(201, $responses[2]->status());
+        $this->assertEquals('{"response": "uploaded_file3"}', $responses[2]->getBody());
+        $this->assertEquals(201, $responses[3]->status());
+        $this->assertEquals('{"response": "uploaded_file4"}', $responses[3]->getBody());
+        $this->assertEquals(201, $responses[4]->status());
+        $this->assertEquals('{"response": "uploaded_file5"}', $responses[4]->getBody());
+    }
+
+    public function testUploadLargeDocumentPartialFailures(): void
+    {
+        $httpClientMock = $this->createMock(HttpClientInterface::class);
+
+        $httpClientMock
+            ->expects($this->exactly(5))
+            ->method('asMultipart')
+            ->willReturnSelf();
+
+        $httpClientMock
+            ->expects($this->exactly(5))
+            ->method('post')
+            ->withConsecutive(
+                ['documents/safe123/uploadbigfile', ['field' => 'file1_content']],
+                ['documents/safe123/uploadbigfile', ['field' => 'file2_content']],
+                ['documents/safe123/uploadbigfile', ['field' => 'file3_content']],
+                ['documents/safe123/uploadbigfile', ['field' => 'file4_content']],
+                ['documents/safe123/uploadbigfile', ['field' => 'file5_content']],
+            )
+            ->willReturnOnConsecutiveCalls(
+                new HttpResponse(201, '{"response": "uploaded_file1"}', []),
+                $this->throwException(new \Exception('Internal Server Error', 500)),
+                new HttpResponse(201, '{"response": "uploaded_file3"}', []),
+                $this->throwException(new \Exception('Bad Request', 400)),
+                new HttpResponse(201, '{"response": "uploaded_file5"}', []),
+            );
+
+        $documentService = new DocumentService($httpClientMock);
+
+        $mockFields = [];
+        for ($i = 1; $i <= 5; $i++) {
+            $mockField = $this->createMock(UploadDocumentFieldsInterface::class);
+
+            $mockField
+                ->method('toArray')
+                ->willReturn(['field' => "file{$i}_content"]);
+            $mockFields[] = $mockField;
+        }
+
+        $responses = [];
+        foreach ($mockFields as $field) {
+            try {
+                $responses[] = $documentService->uploadLargeDocument('safe123', $field);
+            } catch (\Exception $e) {
+                $responses[] = $e->getMessage();
+            }
+        }
+
+        $this->assertEquals(201, $responses[0]->status());
+        $this->assertStringContainsString('Internal Server Error', $responses[1]);
+        $this->assertEquals(201, $responses[2]->status());
+        $this->assertStringContainsString('Bad Request', $responses[3]);
+        $this->assertEquals(201, $responses[4]->status());
     }
 
     public function testUploadLargeDocumentThrowsException(): void
