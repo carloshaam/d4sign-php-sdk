@@ -401,8 +401,6 @@ public function delete(string $uri, array $params = [], array $headers = []): Ht
 
 ## Tratamento de Exceções
 
-## Tratamento de Exceções
-
 A classe lança as seguintes exceções personalizadas:
 
 - **`D4SignUnauthorizedException`**

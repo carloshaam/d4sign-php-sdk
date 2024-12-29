@@ -46,7 +46,7 @@ public function __construct(
 
 ### Exemplo de Uso
 
-``` php
+```php
 use D4Sign\Client\D4SignClient;
 
 $client = new D4SignClient(
@@ -65,7 +65,7 @@ Retorna a instância do cliente HTTP configurado, permitindo a execução de req
 
 #### Sintaxe
 
-``` php
+```php
 public function getHttpClient(): HttpClient
 ```
 
@@ -75,12 +75,12 @@ public function getHttpClient(): HttpClient
 
 #### Comportamento
 
-- Esse método é útil para obter a instância do cliente HTTP e utilizá-la diretamente para executar requisições
+- Esse método serve para obter a instância do cliente HTTP e utilizá-la diretamente para executar requisições
   customizadas ou adicionais à API.
 
 #### Exemplo de Uso
 
-``` php
+```php
 use D4Sign\Client\D4SignClient;
 
 $client = new D4SignClient('seu-token-da-api', 'sua-chave-criptografica');
@@ -94,10 +94,3 @@ $response = $httpClient->get('/meu-endpoint');
 
 A classe não possui lógica complexa além da configuração inicial do cliente HTTP. Portanto, ela funciona apenas como um
 ponto de integração entre o código do usuário e a API da D4Sign.
-
-## Contribuição
-
-Caso você queira contribuir ou relatar um problema na implementação da classe, abra um
-novo [issue no repositório oficial]() ou envie um Pull Request.
-Esta documentação foi gerada para a classe `D4SignClient`. Caso você tenha sugestões ou dúvidas, envie-as usando o
-repositório!

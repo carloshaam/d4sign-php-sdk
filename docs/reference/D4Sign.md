@@ -38,7 +38,7 @@ funcionalidade da API.
 
 ### Sintaxe
 
-``` php
+```php
 public function __construct(
     string $tokenAPI,
     string $cryptKey,
@@ -55,7 +55,7 @@ public function __construct(
 
 ### Exemplo
 
-``` php
+```php
 $d4Sign = new D4Sign('seu-token-da-api', 'sua-chave-criptografica');
 ```
 
@@ -69,7 +69,7 @@ Fornece acesso à API de Cofres (Safes), que inclui métodos para gerenciamento 
 
 #### Sintaxe
 
-``` php
+```php
 public function safes(): SafeServiceInterface
 ```
 
@@ -79,7 +79,7 @@ Instância da interface `SafeServiceInterface`.
 
 #### Exemplo
 
-``` php
+```php
 $safesService = $d4Sign->safes();
 ```
 
@@ -91,7 +91,7 @@ Fornece acesso à API de Documentos (Documents), permitindo o gerenciamento de d
 
 #### Sintaxe
 
-``` php
+```php
 public function documents(): DocumentServiceInterface
 ```
 
@@ -101,7 +101,7 @@ Instância da interface `DocumentServiceInterface`.
 
 #### Exemplo
 
-``` php
+```php
 $documentsService = $d4Sign->documents();
 ```
 
@@ -113,7 +113,7 @@ Fornece acesso à API de Signatários (Signatories), permitindo o gerenciamento 
 
 #### Sintaxe
 
-``` php
+```php
 public function signatories(): SignatoryServiceInterface
 ```
 
@@ -123,7 +123,7 @@ Instância da interface `SignatoryServiceInterface`.
 
 #### Exemplo
 
-``` php
+```php
 $signatoriesService = $d4Sign->signatories();
 ```
 
@@ -135,7 +135,7 @@ Fornece acesso à API de Usuários (Users), que permite o gerenciamento de infor
 
 #### Sintaxe
 
-``` php
+```php
 public function users(): UserServiceInterface
 ```
 
@@ -145,7 +145,7 @@ Instância da interface `UserServiceInterface`.
 
 #### Exemplo
 
-``` php
+```php
 $usersService = $d4Sign->users();
 ```
 
@@ -157,7 +157,7 @@ Fornece acesso à API de Tags, permitindo o gerenciamento de tags vinculadas aos
 
 #### Sintaxe
 
-``` php
+```php
 public function tags(): TagServiceInterface
 ```
 
@@ -167,7 +167,7 @@ Instância da interface `TagServiceInterface`.
 
 #### Exemplo
 
-``` php
+```php
 $tagsService = $d4Sign->tags();
 ```
 
@@ -179,7 +179,7 @@ Fornece acesso à API de Certificados, permitindo o gerenciamento de certificado
 
 #### Sintaxe
 
-``` php
+```php
 public function certificates(): CertificateServiceInterface
 ```
 
@@ -189,7 +189,7 @@ Instância da interface `CertificateServiceInterface`.
 
 #### Exemplo
 
-``` php
+```php
 $certificatesService = $d4Sign->certificates();
 ```
 
@@ -201,7 +201,7 @@ Fornece acesso à API de Watchers, permitindo o gerenciamento de observadores (w
 
 #### Sintaxe
 
-``` php
+```php
 public function watchers(): WatcherServiceInterface
 ```
 
@@ -211,7 +211,7 @@ Instância da interface `WatcherServiceInterface`.
 
 #### Exemplo
 
-``` php
+```php
 $watchersService = $d4Sign->watchers();
 ```
 
@@ -223,7 +223,7 @@ Fornece acesso à API de Webhooks, permitindo o gerenciamento de webhooks e conf
 
 #### Sintaxe
 
-``` php
+```php
 public function webhooks(): WebhookServiceInterface
 ```
 
@@ -233,7 +233,7 @@ Instância da interface `WebhookServiceInterface`.
 
 #### Exemplo
 
-``` php
+```php
 $webhooksService = $d4Sign->webhooks();
 ```
 
@@ -245,16 +245,10 @@ A classe `D4Sign` lança exceções personalizadas para casos de operações inv
 
 ### Exemplo
 
-``` php
+```php
 try {
     $invalidService = $d4Sign->getService('serviceInvalido', ClasseInvalida::class);
 } catch (D4SignInvalidArgumentException $e) {
     echo $e->getMessage(); // "Class ClasseInvalida does not exist."
 }
 ```
-
-## Contribuição
-
-Se você deseja contribuir ou relatar um problema, abra um [Novo Issue no GitHub]() ou envie um Pull Request.
-Esta documentação foi gerada automaticamente para a classe `D4Sign`. Caso você tenha dúvidas ou sugestões, fique à
-vontade para participar da discussão no repositório!
