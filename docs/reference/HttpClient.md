@@ -27,39 +27,6 @@ configuração e envio de requisições.
     - [withDigestAuth]()
     - [withCookies]()
     - [timeout]()
-    - [updateConfiguration]()
-    - [withHandler]()
-    - [download]()
-    - [Métodos HTTP]()
-        - [get]()
-        - [post]()
-        - [put]()
-        - [delete]()
-
-- [Tratamento de Exceções]()
-- [Casos de Uso]()
-- [Limitações Conhecidas]()
-- [Melhores Práticas]()
-
-- [Visão Geral]()
-- [Requisitos]()
-- [Construtor]()
-- [Métodos Estáticos]()
-    - [new]()
-
-- [Métodos Públicos]()
-    - [baseUrl]()
-    - [withOptions]()
-    - [withoutRedirecting]()
-    - [withoutVerifying]()
-    - [asJson]()
-    - [asFormParams]()
-    - [asMultipart]()
-    - [withHeaders]()
-    - [withBasicAuth]()
-    - [withDigestAuth]()
-    - [withCookies]()
-    - [timeout]()
     - [Métodos HTTP]()
         - [get]()
         - [post]()
@@ -89,7 +56,7 @@ Entre suas funcionalidades, incluem-se:
 
 ### Sintaxe
 
-``` php
+```php
 public function __construct(array $config = [])
 ```
 
@@ -106,7 +73,7 @@ GuzzleHttp internamente.
 
 ### Exemplo
 
-``` php
+```php
 use D4Sign\Client\HttpClient;
 
 $client = new HttpClient([
@@ -128,7 +95,7 @@ Cria uma instância do `HttpClient` utilizando sintaxe fluida.
 
 #### Sintaxe
 
-``` php
+```php
 public static function new(array $config = []): self
 ```
 
@@ -138,7 +105,7 @@ public static function new(array $config = []): self
 
 #### Exemplo
 
-``` php
+```php
 $http = HttpClient::new()
     ->baseUrl('https://api.exemplo.com')
     ->timeout(15)
@@ -155,7 +122,7 @@ Define a URL base para as requisições HTTP.
 
 #### Sintaxe
 
-``` php
+```php
 public function baseUrl(string $url): self
 ```
 
@@ -165,7 +132,7 @@ public function baseUrl(string $url): self
 
 #### Exemplo
 
-``` php
+```php
 $http = HttpClient::new()
     ->baseUrl('https://api.exemplo.com');
 ```
@@ -178,7 +145,7 @@ Adiciona opções customizadas ao cliente HTTP.
 
 #### Sintaxe
 
-``` php
+```php
 public function withOptions($options): self
 ```
 
@@ -188,7 +155,7 @@ public function withOptions($options): self
 
 #### Exemplo
 
-``` php
+```php
 $http = HttpClient::new()
     ->withOptions(['timeout' => 10]); // Define um timeout para as requisições
 ```
@@ -201,7 +168,7 @@ Desativa redirecionamentos automáticos no Guzzle.
 
 #### Sintaxe
 
-``` php
+```php
 public function withoutRedirecting(): self
 ```
 
@@ -213,7 +180,7 @@ Desativa a verificação do certificado SSL.
 
 #### Sintaxe
 
-``` php
+```php
 public function withoutVerifying(): self
 ```
 
@@ -225,7 +192,7 @@ Configura o formato de corpo da requisição como JSON com o cabeçalho `Content
 
 #### Sintaxe
 
-``` php
+```php
 public function asJson(): self
 ```
 
@@ -237,7 +204,7 @@ Configura o formato de corpo da requisição como `application/x-www-form-urlenc
 
 #### Sintaxe
 
-``` php
+```php
 public function asFormParams(): self
 ```
 
@@ -249,7 +216,7 @@ Configura o formato de corpo da requisição como multipart/form-data.
 
 #### Sintaxe
 
-``` php
+```php
 public function asMultipart(): self
 ```
 
@@ -261,13 +228,13 @@ Adiciona cabeçalhos padrão para todas as requisições.
 
 #### Sintaxe
 
-``` php
+```php
 public function withHeaders(array $headers): self
 ```
 
 #### Exemplo
 
-``` php
+```php
 $http = HttpClient::new()
     ->withHeaders(['Authorization' => 'Bearer SEU_TOKEN']);
 ```
@@ -280,7 +247,7 @@ Configura autenticação básica (usuário/senha).
 
 #### Sintaxe
 
-``` php
+```php
 public function withBasicAuth(string $username, string $password): self
 ```
 
@@ -288,7 +255,7 @@ public function withBasicAuth(string $username, string $password): self
 
 #### Descrição
 
-``` php
+```php
 public function timeout(float|int $seconds): self
 ```
 
@@ -296,7 +263,7 @@ Define o limite de tempo de uma requisição em segundos.
 
 #### Sintaxe
 
-``` php
+```php
 public function timeout(int $seconds): self
 ```
 
@@ -310,7 +277,7 @@ Atualiza as configurações do cliente sem precisar recriar a instância.
 
 #### Sintaxe
 
-``` php
+```php
 public function updateConfiguration(array $config): self
 ```
 
@@ -320,7 +287,7 @@ public function updateConfiguration(array $config): self
 
 #### Exemplo
 
-``` php
+```php
 $http->updateConfiguration([
     'headers' => ['Custom-Header' => 'Value']
 ]);
@@ -334,13 +301,13 @@ Define um handler personalizado no Guzzle para manipulação direta das requisi�
 
 #### Sintaxe
 
-``` php
+```php
 public function withHandler(callable $handler): self
 ```
 
 #### Exemplo
 
-``` php
+```php
 $http->withHandler(function (RequestInterface $request) {
     // Customize comportamento do request.
 });
@@ -354,7 +321,7 @@ Faz o download de um arquivo a partir de uma URL e salva em um diretório local.
 
 #### Sintaxe
 
-``` php
+```php
 public function download(string $uri, string $destination): void
 ```
 
@@ -365,7 +332,7 @@ public function download(string $uri, string $destination): void
 
 #### Exemplo
 
-``` php
+```php
 $http->download('/arquivo.zip', '/local/arquivo.zip');
 ```
 
@@ -381,19 +348,20 @@ Envia uma requisição `GET` para o URI especificado.
 
 #### Sintaxe
 
-``` php
+```php
 public function get(string $uri, array $params = []): HttpResponse
 ```
 
 #### Exemplo
 
-``` php
+```php
 $response = $http->get('/endpoint', ['chave' => 'valor']);
 $response = $http->get(
     '/endpoint',
     ['chave' => 'valor'],
     ['X-Header' => 'Value']
 );
+```
 
 ### post
 
@@ -403,7 +371,7 @@ Envia uma requisição `POST` com o corpo especificado.
 
 #### Sintaxe
 
-``` php
+```php
 public function post(string $uri, array $params = []): HttpResponse
 ```
 
@@ -415,7 +383,7 @@ Envia uma requisição `PUT` com o corpo especificado.
 
 #### Sintaxe
 
-``` php
+```php
 public function put(string $uri, array $params = []): HttpResponse
 ```
 
@@ -427,8 +395,7 @@ Envia uma requisição `DELETE`.
 
 #### Sintaxe
 
-``` php
-``` php
+```php
 public function delete(string $uri, array $params = [], array $headers = []): HttpResponse
 ```
 
